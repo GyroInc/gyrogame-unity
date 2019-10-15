@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
+using System;
 
 //responsible for handling and maintaining connection to the Cube and interface functions
 public class HardwareInterface : MonoBehaviour
@@ -12,7 +13,7 @@ public class HardwareInterface : MonoBehaviour
 
     public bool connectionEstablished;
 
-    SerialPort port = new SerialPort();
+    SerialPort port;
     Thread connectionHandler;
     bool abortConnect = false;
 
@@ -31,7 +32,7 @@ public class HardwareInterface : MonoBehaviour
         if (port == null) return;
         if (!port.IsOpen) return;
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             port.WriteLine("far0g0b0t1000");
         }
@@ -90,48 +91,64 @@ public class HardwareInterface : MonoBehaviour
             port.WriteLine("fo3r140g255b0t1000");
         }
     }
-    
+
     void OpenConnection()
     {
         while (!abortConnect)
         {
-        //connect to a cube by handshaking with the second software
-        string[] names = SerialPort.GetPortNames();
-
+            //connect to a cube by handshaking with the second software
+            string[] ports = SerialPort.GetPortNames();
+            Debug.Log("Available ports:");
+            Debug.Log("Available ports: "+ String.Join("   ",
+             new List<string>(ports)
+             .ConvertAll(i => i.ToString())
+             .ToArray()));
             //cycle through all the com ports
-            for (int i = 0; i < names.Length; i++)
+            for (int i = 0; i < ports.Length; i++)
             {
-                port = new SerialPort(names[i], baudRate);
-                port.ReadTimeout = 1000;
-                port.WriteTimeout = 1000;
+                port = new SerialPort(ports[i], baudRate);
+                port.ReadTimeout = 200;
+                port.WriteTimeout = 200;
                 try
                 {
-                    port.Close();
                     port.Open();
-                    Thread.Sleep(250);
                     if (port.IsOpen)
                     {
                         port.WriteLine("cc");
-                        if (port.ReadLine().Contains("y"))
+                        Thread.Sleep(50);
+                        string response = "";
+                        try
                         {
-                            print("success at " + names[i]);
+                            response = port.ReadLine();
+                        }
+                        catch (System.TimeoutException)
+                        {
+                            print("Port " + ports[i] + ": read timeout");
+                        }
+                        if (response.Contains("y"))
+                        {
+                            print(ports[i] + ": success");
                             connectionEstablished = true;
                             port.WriteLine("ar0g0b0");
+                            return;
                         }
+                        port.Close();
                         return;
                     }
-                } catch { print(names[i] + " failed"); }
+                }
+                catch { print(ports[i] + ": failed"); }
             }
-
-            Thread.Sleep(1000);
         }
     }
 
     private void OnApplicationQuit()
     {
-        if (port != null)
+        if (port.IsOpen)
+        {
             port.WriteLine("+DISC");
             port.Close();
+        }
+
         abortConnect = true;
         connectionHandler.Abort();
     }
