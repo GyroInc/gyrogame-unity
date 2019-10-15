@@ -114,16 +114,7 @@ public class HardwareInterface : MonoBehaviour
                     if (port.IsOpen)
                     {
                         port.WriteLine("cc");
-                        Thread.Sleep(50);
-                        string response = "";
-                        try
-                        {
-                            response = port.ReadLine();
-                        }
-                        catch (TimeoutException)
-                        {
-                            print("Port " + ports[i] + ": read timeout");
-                        }
+                        string response = port.ReadLine();
                         if (response.Contains("y"))
                         {
                             print(ports[i] + ": success");
