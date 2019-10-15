@@ -129,7 +129,8 @@ public class HardwareInterface : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        if(port != null)
+        if (port != null)
+            port.WriteLine("+DISC");
             port.Close();
         abortConnect = true;
         connectionHandler.Abort();
