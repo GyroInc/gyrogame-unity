@@ -98,7 +98,6 @@ public class HardwareInterface : MonoBehaviour
         {
             //connect to a cube by handshaking with the second software
             string[] ports = SerialPort.GetPortNames();
-            Debug.Log("Available ports:");
             Debug.Log("Available ports: "+ String.Join("   ",
              new List<string>(ports)
              .ConvertAll(i => i.ToString())
@@ -121,7 +120,7 @@ public class HardwareInterface : MonoBehaviour
                         {
                             response = port.ReadLine();
                         }
-                        catch (System.TimeoutException)
+                        catch (TimeoutException)
                         {
                             print("Port " + ports[i] + ": read timeout");
                         }
