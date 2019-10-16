@@ -15,6 +15,8 @@ public class HardwareInterface : MonoBehaviour
     public bool connectionEstablished;
     public Vector3 orientation;
     public GameObject test;
+    float xRaw, yRaw, zRaw;
+    float xNull = 0, yNull = 0, zNull = 0;
 
     SerialPort port;
     Thread connectionHandler;
@@ -33,7 +35,6 @@ public class HardwareInterface : MonoBehaviour
 
         inputListener = new Thread(WaitForInput);
         inputListener.Start();
-        
     }
 
     private void Update()
@@ -41,33 +42,38 @@ public class HardwareInterface : MonoBehaviour
         if (port == null) return;
         if (!port.IsOpen) return;
 
-        if(messages.Count > 0)
-            print(messages.Dequeue());
+        //if (messages.Count > 0)
+        //    print(messages.Dequeue());
 
-        /*
-        if(messages.Count > 0)
+
+        if (messages.Count > 0)
         {
             string message = messages.Dequeue();
             if (message[0] == 'g')
             {
                 message = message.TrimStart('g');
-                message = message.Replace('.', ',');
+                //message = message.Replace('.', ',');
                 string[] parts = message.Split('_');
-                //print(parts[0] + " " + parts[1] + " " + parts[2]);
-                orientation.x = float.Parse(parts[0]);
-                orientation.y = float.Parse(parts[1]);
-                orientation.z = float.Parse(parts[2]);
+                print(parts[0] + " " + parts[1] + " " + parts[2]);
+
+                xRaw = float.Parse(parts[1]);
+                yRaw = float.Parse(parts[2]) / 2;
+                zRaw = float.Parse(parts[0]);
+
+                orientation.x = xRaw - xNull;
+                orientation.y = yRaw - yNull;
+                orientation.z = zRaw - zNull;
 
                 messages.Clear();
             }
         }
-        */
 
-        test.transform.rotation = Quaternion.Euler(orientation);
+
+        test.transform.rotation = Quaternion.Inverse(Quaternion.Euler(orientation));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            port.WriteLine("far0g0b0t1000");
+            port.WriteLine("far0g0b0nt1000");
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -123,13 +129,19 @@ public class HardwareInterface : MonoBehaviour
         {
             port.WriteLine("fo3r140g255b0t1000");
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            xNull = xRaw;
+            yNull = yRaw;
+            zNull = zRaw;
+        }
     }
 
     void OpenConnection()
     {
         while (!abortConnect)
         {
-            //connect to a cube by handshaking with the second software
+            //connect to a cube by handshaking with the cube firmware
             string[] ports = SerialPort.GetPortNames();
             Debug.Log("Available ports: "+ String.Join("   ",
              new List<string>(ports)
@@ -138,6 +150,7 @@ public class HardwareInterface : MonoBehaviour
             //cycle through all the com ports
             for (int i = 0; i < ports.Length; i++)
             {
+                if (abortConnect) return;
                 port = new SerialPort(ports[i], baudRate);
                 port.ReadTimeout = 500;
                 port.WriteTimeout = 500;
@@ -149,15 +162,7 @@ public class HardwareInterface : MonoBehaviour
                         port.WriteLine("cc");
                         Thread.Sleep(50);
                         string response = "";
-                        try
-                        {
-                            response = port.ReadLine();
-                        }
-                        catch (TimeoutException)
-                        {
-                            print("Port " + ports[i] + ": read timeout");
-                            continue;
-                        }
+                        response = port.ReadLine();
                         if (response.Contains("y"))
                         {
                             print(ports[i] + ": success");
