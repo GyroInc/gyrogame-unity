@@ -33,6 +33,7 @@ public class HardwareInterface : MonoBehaviour
 
         inputListener = new Thread(WaitForInput);
         inputListener.Start();
+        
     }
 
     private void Update()
@@ -41,9 +42,12 @@ public class HardwareInterface : MonoBehaviour
         if (!port.IsOpen) return;
 
         if(messages.Count > 0)
+            print(messages.Dequeue());
+
+        /*
+        if(messages.Count > 0)
         {
             string message = messages.Dequeue();
-
             if (message[0] == 'g')
             {
                 message = message.TrimStart('g');
@@ -57,7 +61,8 @@ public class HardwareInterface : MonoBehaviour
                 messages.Clear();
             }
         }
-        
+        */
+
         test.transform.rotation = Quaternion.Euler(orientation);
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -134,8 +139,8 @@ public class HardwareInterface : MonoBehaviour
             for (int i = 0; i < ports.Length; i++)
             {
                 port = new SerialPort(ports[i], baudRate);
-                port.ReadTimeout = 200;
-                port.WriteTimeout = 200;
+                port.ReadTimeout = 500;
+                port.WriteTimeout = 500;
                 try
                 {
                     port.Open();
@@ -176,19 +181,16 @@ public class HardwareInterface : MonoBehaviour
         {
             if (abortConnect || !port.IsOpen) return;
 
-            if(port.BytesToRead > 0)
+            if(port.BytesToRead > 3)
             {
-                string message = "";
+                string message = "";                
                 while (port.BytesToRead > 0)
                 {
                     char next = (char)port.ReadChar();
-                    if (next == '\n') break;
                     message += next;
-                    Thread.Sleep(5);
                 }
                 messages.Enqueue(message);
             }
-
         }
     }
 
@@ -202,7 +204,6 @@ public class HardwareInterface : MonoBehaviour
             port.Close();
         }
 
-        inputListener.Abort();
         connectionHandler.Abort();
     }
 }
