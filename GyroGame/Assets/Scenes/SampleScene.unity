@@ -296,6 +296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459d019ac53682846892ef63fe331c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectionEstablished: 0
+  orientation: {x: 0.5, y: 0, z: 0}
+  test: {fileID: 1791827212}
 --- !u!65 &1791827214
 BoxCollider:
   m_ObjectHideFlags: 0

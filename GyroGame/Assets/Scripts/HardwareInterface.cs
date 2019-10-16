@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
 using System;
+using System.Globalization;
 
 //responsible for handling and maintaining connection to the Cube and interface functions
 public class HardwareInterface : MonoBehaviour
@@ -12,10 +13,14 @@ public class HardwareInterface : MonoBehaviour
     public static HardwareInterface active;
 
     public bool connectionEstablished;
+    public Vector3 orientation;
+    public GameObject test;
 
     SerialPort port;
     Thread connectionHandler;
+    Thread inputListener;
     bool abortConnect = false;
+    Queue<string> messages = new Queue<string>();
 
     static int baudRate = 38400;
 
@@ -25,12 +30,35 @@ public class HardwareInterface : MonoBehaviour
 
         connectionHandler = new Thread(OpenConnection);
         connectionHandler.Start();
+
+        inputListener = new Thread(WaitForInput);
+        inputListener.Start();
     }
 
     private void Update()
     {
         if (port == null) return;
         if (!port.IsOpen) return;
+
+        if(messages.Count > 0)
+        {
+            string message = messages.Dequeue();
+
+            if (message[0] == 'g')
+            {
+                message = message.TrimStart('g');
+                message = message.Replace('.', ',');
+                string[] parts = message.Split('_');
+                //print(parts[0] + " " + parts[1] + " " + parts[2]);
+                orientation.x = float.Parse(parts[0]);
+                orientation.y = float.Parse(parts[1]);
+                orientation.z = float.Parse(parts[2]);
+
+                messages.Clear();
+            }
+        }
+        
+        test.transform.rotation = Quaternion.Euler(orientation);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -123,6 +151,7 @@ public class HardwareInterface : MonoBehaviour
                         catch (TimeoutException)
                         {
                             print("Port " + ports[i] + ": read timeout");
+                            continue;
                         }
                         if (response.Contains("y"))
                         {
@@ -140,15 +169,40 @@ public class HardwareInterface : MonoBehaviour
         }
     }
 
+    void WaitForInput()
+    {
+        while(!connectionEstablished) ;
+        while(!abortConnect)
+        {
+            if (abortConnect || !port.IsOpen) return;
+
+            if(port.BytesToRead > 0)
+            {
+                string message = "";
+                while (port.BytesToRead > 0)
+                {
+                    char next = (char)port.ReadChar();
+                    if (next == '\n') break;
+                    message += next;
+                    Thread.Sleep(5);
+                }
+                messages.Enqueue(message);
+            }
+
+        }
+    }
+
     private void OnApplicationQuit()
     {
+        abortConnect = true;
+
         if (port.IsOpen)
         {
             port.WriteLine("+DISC");
             port.Close();
         }
 
-        abortConnect = true;
+        inputListener.Abort();
         connectionHandler.Abort();
     }
 }
