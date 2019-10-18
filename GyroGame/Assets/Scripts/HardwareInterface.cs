@@ -17,6 +17,7 @@ public class HardwareInterface : MonoBehaviour
     public GameObject test;
     float xRaw, yRaw, zRaw;
     float xNull = 0, yNull = 0, zNull = 0;
+    float x, y, z;
 
     SerialPort port;
     Thread connectionHandler;
@@ -45,31 +46,32 @@ public class HardwareInterface : MonoBehaviour
         //if (messages.Count > 0)
         //    print(messages.Dequeue());
 
-
         if (messages.Count > 0)
         {
             string message = messages.Dequeue();
             if (message[0] == 'g')
             {
                 message = message.TrimStart('g');
-                //message = message.Replace('.', ',');
+                var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                culture.NumberFormat.NumberDecimalSeparator = ".";
                 string[] parts = message.Split('_');
                 print(parts[0] + " " + parts[1] + " " + parts[2]);
 
-                xRaw = float.Parse(parts[1]);
-                yRaw = float.Parse(parts[2]) / 2;
-                zRaw = float.Parse(parts[0]);
+                xRaw = float.Parse(parts[0], culture);
+                yRaw = float.Parse(parts[1], culture);
+                zRaw = float.Parse(parts[2], culture);
 
-                orientation.x = xRaw - xNull;
-                orientation.y = yRaw - yNull;
-                orientation.z = zRaw - zNull;
+                orientation.x = -(xRaw - xNull);
+                orientation.z = -(yRaw - yNull);
+                orientation.y = 0;
+                //orientation.y = -(zRaw - zNull);
+
+                Quaternion newQ = Quaternion.Euler(orientation);
+                test.transform.rotation = Quaternion.RotateTowards(test.transform.rotation, newQ, 1000*Time.deltaTime);
 
                 messages.Clear();
             }
         }
-
-
-        test.transform.rotation = Quaternion.Inverse(Quaternion.Euler(orientation));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -196,6 +198,7 @@ public class HardwareInterface : MonoBehaviour
                 }
                 messages.Enqueue(message);
             }
+            Thread.Sleep(20);
         }
     }
 
