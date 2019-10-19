@@ -52,7 +52,7 @@ public class HardwareInterface : MonoBehaviour
             if (message[0] == 'g')
             {
                 message = message.TrimStart('g');
-                //message = message.Replace('.', ',');
+                message = message.Replace('.', ',');
                 string[] parts = message.Split('_');
                 print(parts[0] + " " + parts[1] + " " + parts[2]);
 
@@ -135,6 +135,37 @@ public class HardwareInterface : MonoBehaviour
             yNull = yRaw;
             zNull = zRaw;
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            port.WriteLine("fo0r255g0b0t1000");
+            Invoke("WriteR", 0.5f);
+            Invoke("WriteG", 1f);
+            Invoke("WriteB", 1.5f);
+            Invoke("WriteO", 2f);
+            Invoke("WriteT", 2.5f);
+        }
+    }
+
+    void WriteR()
+    {
+        port.WriteLine("fo1r255g100b0t1000");
+    }
+    void WriteG()
+    {
+        port.WriteLine("fo2r100g255b0t1000");
+    }
+    void WriteB()
+    {
+        port.WriteLine("fo3r0g2550b100t1000");
+    }
+    void WriteO()
+    {
+        port.WriteLine("fo4r0g100b255t1000");
+    }
+    void WriteT()
+    {
+        port.WriteLine("fo5r255g0b100t1000");
     }
 
     void OpenConnection()
