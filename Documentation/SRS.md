@@ -62,7 +62,7 @@ This document is designed for internal use only and will outline the development
 | -------- | ----------------------------------- |
 | **SRS**  | Software Requirements Specification |
 | **Unity**| The used game engine                |
-| **AAA**  | A very high buget game              |
+| **AAA**  | A very high budget game              |
 
 ### 1.4 References
 
@@ -106,20 +106,20 @@ The game will be a first person puzzle game. The user has to solve puzzles via i
 
 ### 3.2 Usability
 
-With very few user inputs e.g. rotating the cube, walking around and looking around, the game will be intuitive to play. Also there will be at most a minimalistic user interface, to keep the game as simple as possible.
+With very few user inputs e.g. rotating the cube, walking around and looking around, the game will be intuitive to play. Also there will be at most a minimal user interface, to keep the game as simple as possible.
 
 ### 3.3 Reliability
 
 #### 3.3.1 Availability
 
-The game will be available to everyone for free, which includes the building instuctions for the controller. It has to be built by everyone who wants to play the game.
+The game will be available to everyone for free, which includes the building instructions for the controller. It has to be built by everyone who wants to play the game.
 
 #### 3.3.2 Bugs
 
 We classify bugs like the following:
 
 -   **Critical bug**: An error that crashes the game or hinders the player from progressing any further. 
--   **Non critical bug**: An issue that will not create a gamebraking experience like shading issues or misscommunication with the controller.
+-   **Non critical bug**: An issue that will not create a game breaking experience like shading issues or communication issues with the controller.
 
 ### 3.4 Performance
 
@@ -127,24 +127,24 @@ Unity has a baseline hardware requirement that must be met for it to work. Howev
 
 ### 3.5 Supportability
 
-Once the game is finished it wont be supported by us anymore. It is an open source project, so anyone who has imporvements will be able to implement them und update the game.
+Once the game is finished it wont be supported by us anymore. It is an open source project, so anyone who has improvements will be able to implement them und update the game.
 
 ### 3.6 Design Constraints
 
-Due to limited time and resources we will keep the graphics simple and minimalistic, to reduce the time of 3d modelling and focus more on level design.
+Due to limited time and resources we will keep the graphics simple and minimal, to reduce the time of 3d modelling and focus more on level design.
 
 #### 3.6.1 Development tools
 
 -   **git**: Version control system
 -   **YouTrack**: Project management application and sprint management
 -   **Unity**: Game engine
--   **Arduino IDE**: Microcontroller IDE
+-   **Arduino IDE**: IDE for programming microcontrollers 
 -   **Visual Studio**: IDE used for scripting within Unity
 
 #### 3.6.2 Unity
 
 Unity is a free and easy to use game engine. It is widely used by many people and has an active development and user community.
-It is built on the .NET Framework and can be used like any other porgram.
+It is built on the .NET Framework and can be used like any other application.
 
 #### 3.6.3 Arduino IDE
 
