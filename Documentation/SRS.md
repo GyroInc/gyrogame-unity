@@ -98,6 +98,7 @@ This document is designed for internal use only and will outline the development
 | -------- | ----------------------------------- |
 | **SRS**  | Software Requirements Specification |
 | **Unity**| The used game engine                |
+| **AAA**  | A very high buget game              |
 
 
 
@@ -106,9 +107,9 @@ This document is designed for internal use only and will outline the development
 | Title                                                                                                 | Date       |
 | ----------------------------------------------------------------------------------------------------- | ---------- |
 | [Blog](https://gyrogame.de/)                                                     | 19/10/2019 |
-| [GitHub Controller](https://github.com/Manut38/gyrogame-hardware)                                                     | 17/10/2018 |
-| [GitHub Game](https://github.com/Manut38/gyrogame-unity)                                                 | 19/10/2018 |
-| [Use Case Diagram]() | 21/10/2018 |
+| [GitHub Controller](https://github.com/Manut38/gyrogame-hardware)                                                     | 19/10/2019 |
+| [GitHub Game](https://github.com/Manut38/gyrogame-unity)                                                 | 19/10/2019 |
+| [(Use Case Diagram)]() | 21/10/2018 |
 
 ### 1.5 Overview
 
@@ -118,113 +119,52 @@ The next chapters provide information about our vision based on the use case dia
 
 ### 2.1 Vision
 
-The goal of Flashcard Community is to create an online solution for creating flashcards, sort them in boxes and learn with those using some of known learning-systems we will implement. Users can share their boxes with other users, so they can form a small learning community or learning groups.
+The goal of Gyro Game is to create a new kind of game for gamers that are also makers. Users will have the possibility to follow a guide and build their own game controller. When they did so correctly they will be able to play the game.
 
 ## 2.2 Product perspective
 
 Our Use-Case-Diagram
 
-![UseCaseDiagram](https://github.com/phoenixfeder/fc-com/raw/master/graphics/usecases/FlashCardCommunityUseCases.png)
+![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UCD.png)
 
 ### 2.3 User characteristics
 
-Our main target group consists of students who use flashcards for preparing for an exam and want to share their flashcards with a community or just with their friends.
+Our main target group consists of people who like to play video games but also like to build electronics projects.
 
 ### 2.4 Dependencies
 
-FlashCardCommunity depends on a database where all flashcards data is stored.
+!!FlashCardCommunity depends on a database where all flashcards data is stored.
 
 ## 3. Specific Requirements
 
-### 3.1 Functionality – Data Backend
+### 3.1 Functionality - The Controller
 
-The backend is needed to separate the user interface from the data storage. It verifies if the correct permissions are present to request data or to ensure that incoming data is properly parsed and saved correctly. For security reasons data is filtered by the backend. It is then packed in the right format which the next chapter describes. The data is kept inside a database and maintained by the backend.
+The game uses the controller as a key component. Without it the game can not be played. The controller uses a gyroscope to sense its orientation, this data will be used to solve puzzles in game.
+The controller will have a telemetry to show the remaining battery.
 
-#### 3.1.1 Read data given over API endpoints
+### 3.2 Functionality – The Game
 
-For the communication between both sides (frontend and backend) a universal data format is needed, therefore JSON is used. The frontend sends data in JSON to the backend in form of a request and waits for a response from the backend which also answers with JSON.
-
-#### 3.1.2 Parse data
-
-Incoming data needs to be checked if the sent values represent the correct data type and if the user that sends the request has the permissions to do so. For the data transfer we use so called DTO objects, which is an reduced and compact form of the entities the backend is using with the database.
-
-#### 3.1.3 Provide data
-
-After data is requested from the frontend and the user is allowed to do so, the backend sends out the previously mentioned DTO objects. In addition, the response contains a HTTP status code even if the request failed so that the frontend knows if it just received data or an error.
-
-### 3.2 Functionality – User Interface
-
-The frontend provides an user interface for the users to interact with and is able to request data from the data backend. The following subsections explain the types of data the frontend can request.
-According uses cases are:
-
--   [FAQ](https://github.com/phoenixfeder/fc-com/blob/master/UseCases/FAQ/FAQ.md)
-
-#### 3.2.1 User system
-
-At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
-According use cases are:
-
--   [Register Use Case](https://github.com/phoenixfeder/fc-com/tree/master/UseCases/Register/Register.md)
--   [Login Use Case](https://github.com/phoenixfeder/fc-com/tree/master/UseCases/Login/Login.md)
--   [Logout Use Case](https://github.com/phoenixfeder/fc-com/tree/master/UseCases/Logout/Logout.md)
--   [Edit Profile Use Case](https://github.com/phoenixfeder/fc-com/tree/master/UseCases/EditProfile/EditProfile.md)
--   [Close Account Use Case](https://github.com/phoenixfeder/fc-com/tree/master/UseCases/CloseAccount/CloseAccount.md)
-
-#### 3.2.3 Flashcard boxes
-
-Data related to single flashcard boxes contain references to individual flashcards. A user can give permissions to other users so they're able to use the same flashcard box as well.
-A user is able to learn with those boxes.
-According use cases are:
-
--   [Flashcard Boxes](https://github.com/phoenixfeder/fc-com/blob/master/UseCases/FlashcardBox/FlashcardBox.md)
--   [Share Flashcard Boxes](https://github.com/phoenixfeder/fc-com/blob/master/UseCases/ShareFlashcardBoxes/ShareFlashcardBoxes.md)
--   [Learning](https://github.com/phoenixfeder/fc-com/blob/master/UseCases/Learning/Learning.md)
-
-#### 3.2.4 Flashcards
-
-A flashcard data is composed of a yeet is cool and ackpage. For a better overview, flashcards can only be accessed from a individual flashcard boxes.
-According use cases are:
-
--   [Flashcards](https://github.com/phoenixfeder/fc-com/blob/master/UseCases/FlashCard/FlashCard.md)
-
-#### 3.2.5 Statistics
-
-Statistics contains information about the learning progress of individual flashcard boxes and is saved per single user, not per box.
+The game will be a first person puzzle game. The user has to solve puzzles via interaction with the controller. The puzzles will consist of blocked paths which will have to be bypassed by rotating objects, rooms or gravity with the cube. These will be color coded. In addition clues about solving approaches can be given via the lighting output of the controller.
 
 ### 3.3 Usability
 
-We will build the user interface intuitive, so that a new user does not necessarily need an explanation. If questions arise our interface provides a comprehensive FAQ. If the user doesn't know the principle of flashcards and a system to learn with them, the user interface provides a manual how to learn with flashcards as well.
-
-### 3.4 Reliability
-
-In the following we describe the availability, MTBF and MTTR, accuracy and bug classes we strive for.
+With very few user inputs eg. rotating the cube, walking around and looking around, the game will be intuitive to play. Also there will be at most a minimalistic user interface, to keep the game as simple as possible.
 
 #### 3.4.1 Availability
 
-Since we are trying to focus on a bug free application rather than caring about hosting it on our own, the availability depends on the hosting
-provider we choose. Due redundancy and other security arrangements, most providers can ensure an uptime over 99.9% of the time its hosted at their datacenter.
+The game will be available to everyone for free, which includes the building instuctions. The controller has to be built by everyone who wants to play the game.
 
-#### 3.4.2 MTBF, MTTR
 
-If the application fails due an hardware issue, then the mean times are up to our hosting provider. Since the ensured uptime of most hosting providers
-is 99.9%, they try to fix the issue within a few minutes.
-However, if the application fails due a bug in our code, we can revert the code to a previous version that worked fine. This shouldn't take more than
-one or two hours from the point on we noticed.
-
-#### 3.4.3 Accuracy
-
-We can't ensure that the information on the flashcards will be correct since they will be provided by the user itself. As we develop the functions on our own, we can only guarantee that our F.A.Q. will be correct.
-
-#### 3.4.4 Bug classes
+#### 3.4.2 Bugs
 
 We classify bugs like the following:
 
--   **Critical bug**: A critical bug occurs when the database starts dropping data without intention, secret user information, like passwords, are open to the public or users are not able to use the application at all.
--   **Non critical bug**: A non critical bug appears when the user still can use the application but it appears glitched and the user experience is slightly influenced.
+-   **Critical bug**: An error that crashes the game or hinders the player from progressing any further. 
+-   **Non critical bug**: An issue that will not create a gamebraking experience like shading issues or misscommunication with the controller.
 
 ### 3.5 Performance
 
-In general, we try to keep to user experience fluent and response times low. High peaks can still appear when the user loads a large flashcard box or the hosting provider is currently having issues.
+Unity has a baseline hardware requirement that must be met for it to work. However the game will not be an AAA title thus most computers will work.
 
 #### 3.5.1 Response time
 
