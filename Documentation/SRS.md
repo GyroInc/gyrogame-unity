@@ -166,52 +166,25 @@ We classify bugs like the following:
 
 Unity has a baseline hardware requirement that must be met for it to work. However the game will not be an AAA title thus most computers will work.
 
-#### 3.5.1 Response time
-
-As nearly the whole UI will be loaded initially, even pages that aren't shown yet, will appear within less than 100ms when accessed. A huge flashcard box (200 and more) can take a one or two seconds to load, especially when the backend currently needs to handle a larger
-amount of requests.
-
-#### 3.5.2 Throughput
-
-The amount of transactions between the frontend or the backend totally depends on the users behaviour. There will be a few more transactions
-when a user accesses the application initially, but as long he isn't requesting a lot of flashcard boxes hardly any transactions will occur.
-
-#### 3.5.3 Capacity
-
-Current database management software is able to handle single tables up to 65TB of data. Therefore one can say we theoretically able to host
-a nearly unlimited amount of flashcards. Of course we are not able to afford such a huge database, but even on a small storage we can easily host enough flashcards for a small user base.
-
-#### 3.5.4 Resource utilization
-
-Once requested flashcards are loaded, we try to keep them on the client side as long as possible. Thus we decline the waiting time for the user
-and leave open resources for other requests by other users.
-
 ### 3.6 Supportability
 
-Our frontend, backend and each functionality will be clearly separated and we try to stick to naming conventions which are common in the used technologies.
-Furthermore we aim to keep our code clean which we can't guarantee though. Thereby we make it easy to understand our infrastructure and avoid possible confusion
-when one needs to edit older parts of the application.
+Once the game is finished it wont be supported by us anymore. It is an open source project, so anyone who has imporvements will be able to implement them und update the game.
 
 ### 3.7 Design Constraints
 
-We are focused on building a modern-looking application using modern technologies. Of course there are other smaller libraries and frameworks used than the ones that
-are listed, but they represent just a small fraction of the whole project and aren't worth mentioning. Especially in ReactJS one does add a lot of external modules.
+Due to limited time and resources we will keep the graphics simple and minimalistic, to reduce the time of 3d modelling and focus more on level design
 
 #### 3.7.1 Development tools
 
 -   Git: version control system
--   JetBrains IntelliJ: Spring MVC backend development
--   JetBrains WebStorm: React JS frontend development
--   Maven: Build management
--   YouTrack: Project planning tool
--   Travis CI: Continous integration service
--   Codacy: Code quality
--   SonarCloud: Code coverage and metrics
+-   Youtrack: time management application and sprint management
+-   Unity: game engine
+-   Arduino IDE: Microcontroller IDE
+-   Visualstudio: Unity IDE
 
-#### 3.7.2 Spring Boot
+#### 3.7.2 GIT
 
-Spring Boot is built on top of the Spring framework and provides the developer with helpful features to create and run web applications. In our case, a REST Web Service
-which represents the interface between our front- and backend. As we want to benefit from the newest features of Java 10, the platform this service will be hosted on needs to support Java 10 or higher.
+
 
 #### 3.7.3 ReactJS
 
@@ -232,7 +205,7 @@ instructions and enough pictures to show the user exactly what to click at.
 
 ### 3.9 Purchased Components
 
--   N\\A
+-   We won't list any components as purchased to be able to keep self built things.
 
 ### 3.10 Interfaces
 
