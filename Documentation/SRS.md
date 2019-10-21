@@ -1,4 +1,11 @@
-# Gyro Game - Software Requirements Specification
+# GyroGame - Software Requirements Specification
+
+## Revision History
+
+| Date       |  Version | Description       |
+| --------   | -------- | ----------------- |
+| 21/10/2019 |   1.0    | initial version   | 
+
 
 ## Table of Contents
 
@@ -86,7 +93,7 @@
 
 ### 1.1 Purpose
 
-The purpose of this document gives a general description of the Gyro Game Project. It explains our vision and all features of the product. Also it offers insights into the hardware and software elements of the project.
+The purpose of this document gives a general description of the GyroGame Project. It explains our vision and all features of the product. Also it offers insights into the hardware and software elements of the project.
 
 ### 1.2 Scope
 
@@ -99,8 +106,6 @@ This document is designed for internal use only and will outline the development
 | **SRS**  | Software Requirements Specification |
 | **Unity**| The used game engine                |
 | **AAA**  | A very high buget game              |
-
-
 
 ### 1.4 References
 
@@ -119,27 +124,21 @@ The next chapters provide information about our vision based on the use case dia
 
 ### 2.1 Vision
 
-The goal of Gyro Game is to create a new kind of game for gamers that are also makers. Users will have the possibility to follow a guide and build their own game controller. When they did so correctly they will be able to play the game.
+The goal of GyroGame is to create a new kind of game for gamers that are also makers. Users will have the possibility to follow a guide and build their own game controller. When they did so correctly they will be able to play the game.
 
-## 2.2 Product perspective
+### 2.2 Overall Use-Case-Diagram
 
-Our Use-Case-Diagram
+![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.PNG)
 
-![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UCD.png)
-
-### 2.3 User characteristics
+### 2.3 User Characteristics
 
 Our main target group consists of people who like to play video games but also like to build electronics projects.
-
-### 2.4 Dependencies
-
-!!FlashCardCommunity depends on a database where all flashcards data is stored.
 
 ## 3. Specific Requirements
 
 ### 3.1 Functionality - The Controller
 
-The game uses the controller as a key component. Without it the game can not be played. The controller uses a gyroscope to sense its orientation, this data will be used to solve puzzles in game.
+The game uses the custom controller as a key component. Without it the game can not be played. The controller uses a gyroscope to sense its orientation, this data will be used to solve puzzles in game.
 The controller will have a telemetry to show the remaining battery.
 
 ### 3.2 Functionality – The Game
@@ -148,12 +147,13 @@ The game will be a first person puzzle game. The user has to solve puzzles via i
 
 ### 3.3 Usability
 
-With very few user inputs eg. rotating the cube, walking around and looking around, the game will be intuitive to play. Also there will be at most a minimalistic user interface, to keep the game as simple as possible.
+With very few user inputs e.g. rotating the cube, walking around and looking around, the game will be intuitive to play. Also there will be at most a minimalistic user interface, to keep the game as simple as possible.
+
+### 3.4 Reliability
 
 #### 3.4.1 Availability
 
-The game will be available to everyone for free, which includes the building instuctions. The controller has to be built by everyone who wants to play the game.
-
+The game will be available to everyone for free, which includes the building instuctions for the controller. It has to be built by everyone who wants to play the game.
 
 #### 3.4.2 Bugs
 
@@ -164,7 +164,7 @@ We classify bugs like the following:
 
 ### 3.5 Performance
 
-Unity has a baseline hardware requirement that must be met for it to work. However the game will not be an AAA title thus most computers will work.
+Unity has a baseline hardware requirement that must be met for it to work. However the game will not be an AAA title thus most computers will be able to run the game.
 
 #### 3.5.1 Response time
 
