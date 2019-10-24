@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//---------------------------------------------------------------------
+//                     Written by Simon König
+//---------------------------------------------------------------------
+
+
 
 public class PlayerController : MonoBehaviour
 {
-    public AnimationCurve AxisResponse;
+    public AnimationCurve AxisPressResponse;
+    public AnimationCurve AxisReleaseResponse;
     public Transform pCamera;
 
     
@@ -19,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 rotation = new Vector2(0, 0);
     float roty, rotx;
+    float tw, ts, ta, td;
+    bool pw = false, ps = false, pa = false, pd = false;
 
     Rigidbody rb;
 
@@ -36,23 +44,98 @@ public class PlayerController : MonoBehaviour
         pCamera.localEulerAngles = new Vector2(-rotx, 0) * lookSpeed;
         transform.localEulerAngles = new Vector3(0, roty) * lookSpeed;
 
-        //move
-        float axH = Input.GetAxis("Vertical"), axV = Input.GetAxis("Horizontal");
-        //evaluate animation curves
-        float velH = 0, velV = 0;
-        if (axH > 0)
-            velH = AxisResponse.Evaluate(axH);
-        else if (axH < 0)
-            velH = AxisResponse.Evaluate(-axH) * -1f;
-        if (axV > 0)
-            velV = AxisResponse.Evaluate(axV);
-        else if (axV < 0)
-            velV = AxisResponse.Evaluate(-axV) * -1f;
-        rb.velocity = (transform.forward * velH * movSpeedMult) + (transform.right * velV * movSpeedMult) + (new Vector3(0,rb.velocity.y,0));
+        //new Move
+        //button times
+        #region Button stuff
+        if (Input.GetKeyDown(KeyCode.W))
+            tw = 0;
+        if (Input.GetKeyDown(KeyCode.A))
+            ta = 0;
+        if (Input.GetKeyDown(KeyCode.S))
+            ts = 0;
+        if (Input.GetKeyDown(KeyCode.D))
+            td = 0;
+        if (Input.GetKey(KeyCode.W))
+        {
+            tw += Time.deltaTime;
+            pw = true;
+        }            
+        if (Input.GetKey(KeyCode.A))
+        {
+            ta += Time.deltaTime;
+            pa = true;
+        }            
+        if (Input.GetKey(KeyCode.S))
+        {
+            ts += Time.deltaTime;
+            ps = true;
+        }            
+        if (Input.GetKey(KeyCode.D))
+        {
+            td += Time.deltaTime;
+            pd = true;
+        }          
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            tw = 0;
+            pw = false;
+        }        
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            ta = 0;
+            pa = false;
+        }            
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            ts = 0;
+            ps = false;
+        }            
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            td = 0;
+            pd = false;
+        }
+        tw += Time.deltaTime;
+        ta += Time.deltaTime;
+        ts += Time.deltaTime;
+        td += Time.deltaTime;
+        #endregion
+
+        float velH;
+        float velV;
+        float valw, vals, vala, vald;
+
+        if (pw)
+            valw = AxisPressResponse.Evaluate(tw);
+        else
+            valw = AxisReleaseResponse.Evaluate(tw);
+        if (ps)
+            vals = AxisPressResponse.Evaluate(ts);
+        else
+            vals = AxisReleaseResponse.Evaluate(ts);
+        if (pd)
+            vald = AxisPressResponse.Evaluate(td);
+        else
+            vald = AxisReleaseResponse.Evaluate(td);
+        if (pa)
+            vala = AxisPressResponse.Evaluate(ta);
+        else
+            vala = AxisReleaseResponse.Evaluate(ta);
+
+        velV = Mathf.Abs(valw) > Mathf.Abs(vals) ? valw : -vals;
+        velH = Mathf.Abs(vald) > Mathf.Abs(vala) ? vald : -vala;
+
+        rb.velocity = (transform.forward * velV * movSpeedMult) + (transform.right * velH * movSpeedMult) + (new Vector3(0,rb.velocity.y,0));
+        
 
         //jump
         if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(rb.velocity.y > 0)
+                rb.AddForce(new Vector3(0, jumpForce - rb.velocity.y * 3, 0), ForceMode.Impulse);
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+        }
+            
 
         //better jump cuz no one cares about physics
         if (rb.velocity.y < jumpSpeedCutoff)

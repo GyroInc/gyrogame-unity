@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 916193989226121834}
   m_LocalRotation: {x: 0, y: -0.59833866, z: 0, w: 0.8012433}
   m_LocalPosition: {x: -1.28, y: 2.37, z: -2.6694756}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.3, y: 0.7, z: 0.3}
   m_Children:
   - {fileID: 916193989514722672}
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916193989226121834}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d70d5ca867c2a69459f17006af5fdee5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -80,16 +80,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 4.427146
-      outSlope: 4.427146
+      time: 0.0012702942
+      value: 0.20141602
+      inSlope: 1.4048721
+      outSlope: 1.4048721
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04553001
+      outWeight: 0.06034573
     - serializedVersion: 3
-      time: 0.5574501
+      time: 0.82139665
       value: 0.99879026
       inSlope: 0
       outSlope: 0
@@ -112,9 +112,10 @@ MonoBehaviour:
   pCamera: {fileID: 916193989514722672}
   movSpeedMult: 5.5
   lookSpeed: 3
-  jumpForce: 7
-  fallMult: 3
+  jumpForce: 8.5
+  fallMult: 2.5
   lowJumpMult: 2
+  jumpSpeedCutoff: 0.15
 --- !u!1 &916193989514722677
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.15
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 75
   orthographic: 0
