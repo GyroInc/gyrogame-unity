@@ -76,41 +76,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca123901adc6374b96573e668d82ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AxisResponse:
+  AxisPressResponse:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0012702942
-      value: 0.20141602
-      inSlope: 1.4048721
-      outSlope: 1.4048721
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.06034573
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.82139665
-      value: 0.99879026
-      inSlope: 0
-      outSlope: 0
+      time: 0.09936872
+      value: 0.5018154
+      inSlope: 0.7953329
+      outSlope: 0.7953329
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.19776198
+      outWeight: 0.050586637
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 2.0017781
+      value: 1.0014117
+      inSlope: 0.0038621423
+      outSlope: 0.0038621423
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23592922
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AxisReleaseResponse:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0000000037252903
+      value: 0.9964322
+      inSlope: -0.000033834935
+      outSlope: -0.000033834935
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.18367346
+    - serializedVersion: 3
+      time: 0.38333243
+      value: -0.000003713183
+      inSlope: -0.061867367
+      outSlope: -0.061867367
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09263961
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   pCamera: {fileID: 916193989514722672}
-  movSpeedMult: 5.5
+  movSpeedMult: 8
   lookSpeed: 3
   jumpForce: 8.5
   fallMult: 2.5

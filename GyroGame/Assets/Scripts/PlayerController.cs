@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.fixedDeltaTime = 1f / 200f;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -125,8 +126,13 @@ public class PlayerController : MonoBehaviour
         velV = Mathf.Abs(valw) > Mathf.Abs(vals) ? valw : -vals;
         velH = Mathf.Abs(vald) > Mathf.Abs(vala) ? vald : -vala;
 
-        rb.velocity = (transform.forward * velV * movSpeedMult) + (transform.right * velH * movSpeedMult) + (new Vector3(0,rb.velocity.y,0));
-        
+        if (rb.SweepTestAll((transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized, 0.3f).Length == 0 || rb.velocity.y == 0)
+            rb.velocity = (transform.forward * velV * movSpeedMult) + (transform.right * velH * movSpeedMult) + (new Vector3(0, rb.velocity.y, 0));
+        else
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
+        Debug.DrawRay(transform.position, (transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized * 0.3f);
+            
 
         //jump
         if(Input.GetKeyDown(KeyCode.Space))
