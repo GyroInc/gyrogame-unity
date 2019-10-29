@@ -149,4 +149,32 @@ public class PlayerController : MonoBehaviour
         else if(rb.velocity.y > jumpSpeedCutoff && !Input.GetKey(KeyCode.Space))
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMult - 1f) * Time.deltaTime;
     }
+
+    public void ChangeGravity(Vector3 grav)
+    {
+        if(grav.x > 0)
+        {
+            transform.Rotate(0, 0, 90);
+        }
+        if (grav.x < 0)
+        {
+            transform.Rotate(0, 0, -90);
+        }
+        if (grav.y > 0)
+        {
+            transform.Rotate(180, 0, 0);
+        }
+        if (grav.y < 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.eulerAngles.y, 0));
+        }
+        if (grav.z > 0)
+        {
+            transform.Rotate(180, 0, 0);
+        }
+        if (grav.z < 0)
+        {
+            transform.Rotate(180, 0, 0);
+        }
+    }
 }
