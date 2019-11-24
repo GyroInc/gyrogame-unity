@@ -32,7 +32,14 @@ ExportedObj/
 sysinfo.txt
 
 # Unity ignore lightmap data
-**/Scenes/*/
+# Lightmaps
+*.exr
+*.exr.meta
+LightmapSnapshot.asset
+LightmapSnapshot.asset.meta
+LightingData.asset
+LightingData.asset.meta
+
 
 # Builds
 *.apk
