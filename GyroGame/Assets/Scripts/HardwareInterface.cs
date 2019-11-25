@@ -35,20 +35,9 @@ public class HardwareInterface : MonoBehaviour
     {
         active = this;
 
-#if (DEBUG)
-        port = new SerialPort("COM6", baudRate);
-        port.Open();
-        while (!connectionEstablished)
-        {
-            if (testForCube())
-            {
-                connectionEstablished = true;
-            }
-        }
-#else
         connectionHandler = new Thread(OpenConnection);
         connectionHandler.Start();
-#endif
+
         inputListener = new Thread(WaitForInput);
         inputListener.Start();
     }
@@ -69,6 +58,8 @@ public class HardwareInterface : MonoBehaviour
                 culture.NumberFormat.NumberDecimalSeparator = ".";
                 string[] parts = message.Split('_');
                 print("w" + parts[0] + " x" + parts[1] + " y" + parts[2] + " z" + parts[3]);
+                messages.Clear();
+
 
                 qRaw.w = -float.Parse(parts[0], culture);
                 qRaw.x = float.Parse(parts[1], culture);
@@ -92,11 +83,13 @@ public class HardwareInterface : MonoBehaviour
                 //test.transform.rotation = Quaternion.RotateTowards(test.transform.rotation, newQ, 1000*Time.deltaTime);
 
                 //test.transform.rotation = Quaternion.Euler(euler);
-                test.transform.rotation = q;
+                test.transform.rotation = qRaw;
+                //Vector3 euler = test.transform.rotation.eulerAngles;
+                //euler.x -= 90;
+                //test.transform.rotation = Quaternion.Euler(euler);
 
-                print(qNull);
+                //print(qNull);
 
-                messages.Clear();
             }
         }
 
@@ -107,12 +100,16 @@ public class HardwareInterface : MonoBehaviour
     {
         while (!abortConnect)
         {
+#if DEBUG
+            string[] ports = { "COM5" };
+#else
             //connect to a cube by handshaking with the cube firmware
             string[] ports = SerialPort.GetPortNames();
             Debug.Log("Available ports: " + String.Join("   ",
              new List<string>(ports)
              .ConvertAll(i => i.ToString())
              .ToArray()));
+#endif
             //cycle through all the com ports
             for (int i = 0; i < ports.Length; i++)
             {
@@ -146,15 +143,13 @@ public class HardwareInterface : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             qNull = Quaternion.identity * Quaternion.Inverse(qRaw);
-
-
             qNull.Normalize();
 
-            eulerNull = qRaw.eulerAngles;
+            //eulerNull = qRaw.eulerAngles;
 
-            eulerNull.x = -1 * (float)Math.Round(eulerNull.x / 90.0) * 90;
-            eulerNull.y = -1 * (float)Math.Round(eulerNull.y / 90.0)  * 90;
-            eulerNull.z = -1 * (float)Math.Round(eulerNull.z / 90.0) * 90;
+            //eulerNull.x = -1 * (float)Math.Round(eulerNull.x / 90.0) * 90;
+            //eulerNull.y = -1 * (float)Math.Round(eulerNull.y / 90.0)  * 90;
+            //eulerNull.z = -1 * (float)Math.Round(eulerNull.z / 90.0) * 90;
 
             //port.WriteLine("c");
 
