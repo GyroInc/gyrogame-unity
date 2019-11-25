@@ -1,6 +1,4 @@
-﻿//#define DEBUG
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
@@ -15,246 +13,192 @@ public class HardwareInterface : MonoBehaviour
     //there must only be one
     public static HardwareInterface active;
 
-    public bool connectionEstablished;
+    public int baudRate = 38400;
+    public bool debugQuaternion;
+    public bool fixedCOMPort;
+    public string debugCOMPort;
+
+    private Thread connectionHandlerThread;
+    private Thread communicationHandlerThread;
+
+    private SerialPort port;
     private bool abortConnect = false;
-    private Vector3 orientation;
-    public GameObject test;
-    private Quaternion qRaw , q;
-    private Quaternion qNull = Quaternion.identity;
-    private Vector3 eulerNull;
+    Queue<string> inMessages = new Queue<string>();
+    Queue<string> outMessages = new Queue<string>();
 
-    SerialPort port;
-    Thread connectionHandler;
-    Thread inputListener;
-
-    Queue<string> messages = new Queue<string>();
-
-    static int baudRate = 38400;
+    public Quaternion cubeRotation;
+    public int voltage;
+    public bool connected;
 
     private void Start()
     {
         active = this;
-
-        connectionHandler = new Thread(OpenConnection);
-        connectionHandler.Start();
-
-        inputListener = new Thread(WaitForInput);
-        inputListener.Start();
     }
 
     private void Update()
     {
         if (port == null) return;
-        if (!port.IsOpen) return;
+        if (!port.IsOpen || !connected) return;
 
-        if (messages.Count > 0)
+        if (inMessages.Count > 0)
         {
-            string message = messages.Dequeue();
-            Debug.Log("Incoming message\n" + message);
+            string message = inMessages.Dequeue();
+            if (inMessages.Count > 10)
+            {
+                Debug.Log("Too many messages from cube! Skipping some...");
+                inMessages.Clear();
+            }
             if (message[0] == 'q')
             {
                 message = message.TrimStart('q');
                 var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                 culture.NumberFormat.NumberDecimalSeparator = ".";
                 string[] parts = message.Split('_');
-                print("w" + parts[0] + " x" + parts[1] + " y" + parts[2] + " z" + parts[3]);
-                messages.Clear();
-
-
-                qRaw.w = -float.Parse(parts[0], culture);
-                qRaw.x = float.Parse(parts[1], culture);
-                qRaw.y = float.Parse(parts[3], culture);
-                qRaw.z = -float.Parse(parts[2], culture);
-                qRaw.Normalize();
-
-                q = qNull * qRaw;
-                //Vector3 euler = q.eulerAngles;
-                //euler.z = -euler.z;
-
-
-
-                //q.w = qRaw.w * qNull.w;
-                //q.x = qRaw.x * qNull.x;
-                //q.y = qRaw.y * qNull.y;
-                //q.z = qRaw.z * qNull.z;
-
-                //q = qRaw * Quaternion.Inverse(qNull);
-                //q.Normalize();
-                //test.transform.rotation = Quaternion.RotateTowards(test.transform.rotation, newQ, 1000*Time.deltaTime);
-
-                //test.transform.rotation = Quaternion.Euler(euler);
-                test.transform.rotation = qRaw;
-                //Vector3 euler = test.transform.rotation.eulerAngles;
-                //euler.x -= 90;
-                //test.transform.rotation = Quaternion.Euler(euler);
-
-                //print(qNull);
+                if (debugQuaternion)
+                {
+                    Debug.Log("Incoming Quaternion:\nw" + parts[0] + " x" + parts[1] + " y" + parts[2] + " z" + parts[3]);
+                }
+                cubeRotation.w = -float.Parse(parts[0], culture);
+                cubeRotation.x = float.Parse(parts[1], culture);
+                cubeRotation.y = float.Parse(parts[3], culture);
+                cubeRotation.z = float.Parse(parts[2], culture);
+                cubeRotation.Normalize();
 
             }
+            else
+            {
+                Debug.Log("Incoming message from Cube\n" + message);
+            }
         }
-
-        HandleKeyInput();
     }
 
-    void OpenConnection()
+    public void Connect()
+    {
+        connectionHandlerThread = new Thread(T_OpenConnection);
+        connectionHandlerThread.Start();
+    }
+
+    public void Disconnect()
+    {
+        abortConnect = true;
+        connected = false;
+
+        if (connectionHandlerThread != null) { connectionHandlerThread.Abort(); }
+        if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
+
+        if (port != null)
+        {
+            if (port.IsOpen)
+            {
+                port.WriteLine("+DISC");
+                port.Close();
+            }
+        }
+        Debug.Log("Cube disconnected");
+    }
+
+    public void SendCommand(string message)
+    {
+        Debug.Log("Sending command\n" + message);
+        outMessages.Enqueue(message);
+    }
+
+    private void T_OpenConnection()
     {
         while (!abortConnect)
         {
-#if DEBUG
-            string[] ports = { "COM5" };
-#else
-            //connect to a cube by handshaking with the cube firmware
-            string[] ports = SerialPort.GetPortNames();
-            Debug.Log("Available ports: " + String.Join("   ",
-             new List<string>(ports)
-             .ConvertAll(i => i.ToString())
-             .ToArray()));
-#endif
+            string[] ports;
+            if (fixedCOMPort)
+            {
+                ports = new string[1];
+                ports[0] = debugCOMPort;
+            }
+            else
+            {
+                //connect to a cube by handshaking with the cube firmware
+                ports = SerialPort.GetPortNames();
+                Debug.Log("Available ports: " + String.Join("   ",
+                 new List<string>(ports)
+                 .ConvertAll(i => i.ToString())
+                 .ToArray()));
+            }
+
             //cycle through all the com ports
             for (int i = 0; i < ports.Length; i++)
             {
                 if (abortConnect) return;
                 port = new SerialPort(ports[i], baudRate);
-                port.ReadTimeout = 500;
-                port.WriteTimeout = 500;
+                port.ReadTimeout = 100;
+                port.WriteTimeout = 100;
                 try
                 {
                     port.Open();
                     if (port.IsOpen)
                     {
-                        if (testForCube())
+                        if (TestForCube())
                         {
-                            print(ports[i] + ": success");
-                            connectionEstablished = true;
+                            print(ports[i] + "\nconnected successfully");
                             port.WriteLine("ar0g0b0");
+                            connected = true;
+                            communicationHandlerThread = new Thread(T_SendReceive);
+                            communicationHandlerThread.Start();
                             return;
                         }
                         port.Close();
-                        return;
                     }
                 }
-                catch { print(ports[i] + ": failed"); }
+                catch { Debug.Log(ports[i] + ": failed"); }
             }
         }
     }
 
-    private void HandleKeyInput()
+    private void T_SendReceive()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        while (connected && !abortConnect && port.IsOpen)
         {
-            qNull = Quaternion.identity * Quaternion.Inverse(qRaw);
-            qNull.Normalize();
+            if (port.BytesToRead > 0)
+            {
+                string message = port.ReadLine();
+                inMessages.Enqueue(message);
+            }
+            if (outMessages.Count > 0)
+            {
+                port.WriteLine(outMessages.Dequeue());
+            }
 
-            //eulerNull = qRaw.eulerAngles;
-
-            //eulerNull.x = -1 * (float)Math.Round(eulerNull.x / 90.0) * 90;
-            //eulerNull.y = -1 * (float)Math.Round(eulerNull.y / 90.0)  * 90;
-            //eulerNull.z = -1 * (float)Math.Round(eulerNull.z / 90.0) * 90;
-
-            //port.WriteLine("c");
-
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            port.WriteLine("far0g0b0nt1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            port.WriteLine("far255g100b0t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            port.WriteLine("farg255b100t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            port.WriteLine("far100g0b255t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            port.WriteLine("ar255g0b0");
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            port.WriteLine("ar0g255b0");
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            port.WriteLine("ar0g0b255");
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            port.WriteLine("b64");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            port.WriteLine("b220");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            port.WriteLine("fo0r0g255b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            port.WriteLine("fo1r0g10b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            port.WriteLine("fo2r80g255b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            port.WriteLine("fo3r140g255b0t1000");
+            Thread.Sleep(10);
         }
     }
 
-    bool testForCube()
+    private bool TestForCube()
     {
         port.WriteLine("cc");
         Thread.Sleep(20);
-        string response = "";
-        response = port.ReadLine();
-        return response.Contains("y");
-
-    }
-
-    void WaitForInput()
-    {
-        while (!connectionEstablished) ;
-        while (!abortConnect)
+        if (port.BytesToRead > 0)
         {
-            if (abortConnect || !port.IsOpen) return;
-
-            if (port.BytesToRead > 3)
-            {
-                string message = "";
-                while (port.BytesToRead > 0)
-                {
-                    char next = (char)port.ReadChar();
-                    message += next;
-                }
-                messages.Enqueue(message);
-            }
-            Thread.Sleep(20);
+            string response = port.ReadLine();
+            return response.Contains("y");
         }
+        return false;
     }
 
     private void OnApplicationQuit()
     {
-        abortConnect = true;
+        Disconnect();
+    }
 
-        if (port.IsOpen)
-        {
-            port.WriteLine("+DISC");
-            port.Close();
-        }
+    public bool IsConnected()
+    {
+        return connected;
+    }
 
-        if (connectionHandler != null) { connectionHandler.Abort(); }
+    public Quaternion GetRotation()
+    {
+        return cubeRotation;
+    }
+
+    public int GetVoltage()
+    {
+        return voltage;
     }
 }
