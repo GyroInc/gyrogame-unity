@@ -20,7 +20,7 @@ public class HardwareInterface : MonoBehaviour
     private float connectionTimeout = 6.5f;
 
     [Header("Debug Settings")]
-    public bool debugQuaternion;  
+    public bool debugMessages = false;  
     public bool fixedCOMPort;
     public string debugCOMPort;
 
@@ -38,6 +38,12 @@ public class HardwareInterface : MonoBehaviour
     private SerialPort port;
     Queue<string> inMessages = new Queue<string>();
     Queue<string> outMessages = new Queue<string>();
+
+    public event CubeStatusChangeHandler CubeConnectedEvent;
+    public event CubeStatusChangeHandler CubeDisconnectedEvent;
+
+    public delegate void CubeStatusChangeHandler();
+
 
     private void Start()
     {
@@ -65,10 +71,6 @@ public class HardwareInterface : MonoBehaviour
                     var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                     culture.NumberFormat.NumberDecimalSeparator = ".";
                     string[] parts = message.Split('_');
-                    if (debugQuaternion)
-                    {
-                        Debug.Log("Incoming Quaternion:\nw" + parts[0] + " x" + parts[1] + " y" + parts[2] + " z" + parts[3]);
-                    }
                     cubeRotation.w = -float.Parse(parts[0], culture);
                     cubeRotation.x = float.Parse(parts[1], culture);
                     cubeRotation.y = float.Parse(parts[3], culture);
@@ -76,7 +78,10 @@ public class HardwareInterface : MonoBehaviour
                     cubeRotation.Normalize();
                     break;
                 case 'v':
-                    Debug.Log("Incoming voltage:\n" + message);
+                    if (debugMessages)
+                    {
+                        Debug.Log("Incoming voltage:\n" + message);
+                    }
                     message = message.TrimStart('v');
                     voltage = int.Parse(message);
                     cubeTimeoutTimer = 0f;
@@ -134,6 +139,10 @@ public class HardwareInterface : MonoBehaviour
                 }
             }
             Debug.Log("Cube disconnected");
+            if(CubeDisconnectedEvent != null)
+            {
+                CubeDisconnectedEvent();
+            }
         }
         else
         {
@@ -165,7 +174,7 @@ public class HardwareInterface : MonoBehaviour
 
     public void SendCommand(string message)
     {
-        Debug.Log("Sending command:\n" + message);
+        Debug.Log("Sending command to cube:\n" + message);
         outMessages.Enqueue(message);
     }
 
@@ -228,6 +237,17 @@ public class HardwareInterface : MonoBehaviour
         return brightness;
     }
 
+    public void OnCubeConnected(Action method)
+    {
+        CubeConnectedEvent += new CubeStatusChangeHandler(method);
+    }
+
+    public void OnCubeDisconnected(Action method)
+    {
+        CubeDisconnectedEvent += new CubeStatusChangeHandler(method);
+    }
+    
+
     /* ################################
      * ####### Private Methods ########
      * ################################ */
@@ -271,6 +291,10 @@ public class HardwareInterface : MonoBehaviour
                             SetLedBrightness(defaultBrightness);
                             connected = true;
                             connectionAttempt = false;
+                            if (CubeConnectedEvent != null)
+                            {
+                                CubeConnectedEvent();
+                            }
                             communicationHandlerThread = new Thread(T_SendReceive);
                             communicationHandlerThread.Start();
                             return;

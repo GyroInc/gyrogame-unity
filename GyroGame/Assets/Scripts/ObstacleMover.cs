@@ -10,25 +10,15 @@ public class ObstacleMover : MonoBehaviour
     Color orgColor;
     Color targetColor;
 
-    bool connectionConfirmed = false;
     bool selectionActive = false;
 
     private void Start()
     {
-        HardwareInterface.active.Connect();
+
     }
 
     void Update()
     {
-        if(!connectionConfirmed)
-        {
-            if(HardwareInterface.active.IsConnected())
-            {
-                connectionConfirmed = true;
-                HardwareInterface.active.FadeAllLeds(CubeColor.black, 1000);
-            }            
-        }
-
         //select on click
         if(Input.GetMouseButtonDown(0))
         {
@@ -59,7 +49,6 @@ public class ObstacleMover : MonoBehaviour
                 HardwareInterface.active.FadeAllLeds(CubeColor.black, 1000);
                 selectionActive = false;
             }
-                
         }
 
         if(selectionActive)
