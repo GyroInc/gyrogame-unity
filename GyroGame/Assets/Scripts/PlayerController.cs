@@ -30,6 +30,14 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+    // holds lock values to manage the Windows cursor
+    CursorLockMode lockMode;
+    void Awake()
+    {
+        lockMode = CursorLockMode.Locked;
+        Cursor.lockState = lockMode;
+    }
+
     void Start()
     {
         Time.fixedDeltaTime = 1f / 200f;
