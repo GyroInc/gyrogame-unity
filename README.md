@@ -1,6 +1,8 @@
-# GyroGame
+![](https://raw.githubusercontent.com/Manut38/gyrogame-unity/master/Documentation/Logo/GyroGame_textlogo.png)
 
-`"Where is down again?!"`
+<br>
+
+`"Which way is up again?!"`
 
 GyroGame is a game about loosing every touch with reality.
 
