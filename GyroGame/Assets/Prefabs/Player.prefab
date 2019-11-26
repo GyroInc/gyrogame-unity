@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 916193989226121832}
   - component: {fileID: 916193989226121828}
   - component: {fileID: 916193989226121835}
+  - component: {fileID: 2053750091292155071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -89,14 +90,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.09936872
+      time: 0.10190905
       value: 0.5018154
-      inSlope: 0.7953329
-      outSlope: 0.7953329
+      inSlope: 0.7313606
+      outSlope: 0.7313606
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.050586637
+      outWeight: 0.06536245
     - serializedVersion: 3
       time: 2.0017781
       value: 1.0014117
@@ -115,12 +116,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.0000000037252903
       value: 0.9964322
-      inSlope: -0.000033834935
-      outSlope: -0.000033834935
+      inSlope: -7.1807365
+      outSlope: -7.1807365
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.18367346
+      outWeight: 0.038071055
     - serializedVersion: 3
       time: 0.38333243
       value: -0.000003713183
@@ -136,10 +137,24 @@ MonoBehaviour:
   pCamera: {fileID: 916193989514722672}
   movSpeedMult: 8
   lookSpeed: 3
-  jumpForce: 8.5
+  jumpForce: 5
   fallMult: 2.5
   lowJumpMult: 2
   jumpSpeedCutoff: 0.15
+--- !u!114 &2053750091292155071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916193989226121834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed80c03cc8e2c4e4583c15fe8d535802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 0}
+  selectionRange: 100
 --- !u!1 &916193989514722677
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +196,8 @@ Camera:
   m_GameObject: {fileID: 916193989514722677}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.9433962, g: 0.5721484, b: 0.25364897, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.11372549, g: 0.11372549, b: 0.11372549, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
