@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System.IO.Ports;
-using System.Threading;
-using System;
 using System.Globalization;
+using System.IO.Ports;
+using System.Security.Permissions;
+using System.Threading;
+using UnityEngine;
+
 
 //responsible for handling and maintaining connection to the Cube and interface functions
 public class HardwareInterface : MonoBehaviour
@@ -12,234 +13,317 @@ public class HardwareInterface : MonoBehaviour
     //there must only be one
     public static HardwareInterface active;
 
-    public bool connectionEstablished;
-    public Vector3 orientation;
-    public GameObject test;
-    float xRaw, yRaw, zRaw;
-    float xNull = 0, yNull = 0, zNull = 0;
+    [Header("Preferences")]
+    public int baudRate = 38400;
+    public int defaultBrightness;
+    public float connectionTimeout;
 
-    SerialPort port;
-    Thread connectionHandler;
-    Thread inputListener;
-    bool abortConnect = false;
-    Queue<string> messages = new Queue<string>();
+    [Header("Debug Settings")]
+    public bool debugQuaternion;
+    public bool fixedCOMPort;
+    public string debugCOMPort;
 
-    static int baudRate = 38400;
+    [Header("Status Information")]
+    public bool connected;
+    public Quaternion cubeRotation;
+
+    private int voltage, brightness;
+    private bool connectionAttempt;
+    private float cubeTimeoutTimer;
+
+    private Thread connectionHandlerThread;
+    private Thread communicationHandlerThread;
+
+    private SerialPort port;
+    Queue<string> inMessages = new Queue<string>();
+    Queue<string> outMessages = new Queue<string>();
 
     private void Start()
     {
         active = this;
-
-        connectionHandler = new Thread(OpenConnection);
-        connectionHandler.Start();
-
-        inputListener = new Thread(WaitForInput);
-        inputListener.Start();
     }
 
     private void Update()
     {
         if (port == null) return;
-        if (!port.IsOpen) return;
+        if (!port.IsOpen || !connected) return;
+        cubeTimeoutTimer += Time.deltaTime;
 
-        //if (messages.Count > 0)
-        //    print(messages.Dequeue());
-
-
-        if (messages.Count > 0)
+        if (inMessages.Count > 0)
         {
-            string message = messages.Dequeue();
-            if (message[0] == 'g')
+            string message = inMessages.Dequeue();
+            if (inMessages.Count > 10)
             {
-                message = message.TrimStart('g');
-                message = message.Replace('.', ',');
-                string[] parts = message.Split('_');
-                print(parts[0] + " " + parts[1] + " " + parts[2]);
-
-                xRaw = float.Parse(parts[1]);
-                yRaw = float.Parse(parts[2]) / 2;
-                zRaw = float.Parse(parts[0]);
-
-                orientation.x = xRaw - xNull;
-                orientation.y = yRaw - yNull;
-                orientation.z = zRaw - zNull;
-
-                messages.Clear();
+                Debug.Log("Too many messages from cube! Skipping some...");
+                inMessages.Clear();
+            }
+            switch (message[0])
+            {
+                case 'q':
+                    message = message.TrimStart('q');
+                    var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                    culture.NumberFormat.NumberDecimalSeparator = ".";
+                    string[] parts = message.Split('_');
+                    if (debugQuaternion)
+                    {
+                        Debug.Log("Incoming Quaternion:\nw" + parts[0] + " x" + parts[1] + " y" + parts[2] + " z" + parts[3]);
+                    }
+                    cubeRotation.w = -float.Parse(parts[0], culture);
+                    cubeRotation.x = float.Parse(parts[1], culture);
+                    cubeRotation.y = float.Parse(parts[3], culture);
+                    cubeRotation.z = float.Parse(parts[2], culture);
+                    cubeRotation.Normalize();
+                    break;
+                case 'v':
+                    Debug.Log("Incoming voltage:\n" + message);
+                    message = message.TrimStart('v');
+                    voltage = int.Parse(message);
+                    cubeTimeoutTimer = 0f;
+                    break;
+                default:
+                    Debug.Log("Unhandled incoming message from Cube\n" + message);
+                    break;
             }
         }
+    }
 
+    /* ################################
+     * ####### Public Methods #########
+     * ################################ */
 
-        test.transform.rotation = Quaternion.Inverse(Quaternion.Euler(orientation));
-
-        if (Input.GetKeyDown(KeyCode.Space))
+    public void Connect()
+    {
+        if (!connected)
         {
-            port.WriteLine("far0g0b0nt1000");
+            if (!connectionAttempt)
+            {
+                Debug.Log("Connecting to Cube...");
+                connectionAttempt = true;
+                connectionHandlerThread = new Thread(T_OpenConnection);
+                connectionHandlerThread.Start();
+            }
+            else
+            {
+                Debug.Log("Unable to connect to Cube!\nConnection attempt in progress.");
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            port.WriteLine("far255g100b0t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            port.WriteLine("farg255b100t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            port.WriteLine("far100g0b255t1000");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            port.WriteLine("ar255g0b0");
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            port.WriteLine("ar0g255b0");
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            port.WriteLine("ar0g0b255");
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            port.WriteLine("b64");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            port.WriteLine("b220");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            port.WriteLine("fo0r0g255b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            port.WriteLine("fo1r0g10b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            port.WriteLine("fo2r80g255b100t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            port.WriteLine("fo3r140g255b0t1000");
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            xNull = xRaw;
-            yNull = yRaw;
-            zNull = zRaw;
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            port.WriteLine("fo0r255g0b0t1000");
-            Invoke("WriteR", 0.5f);
-            Invoke("WriteG", 1f);
-            Invoke("WriteB", 1.5f);
-            Invoke("WriteO", 2f);
-            Invoke("WriteT", 2.5f);
+            Debug.Log("Unable to connect to Cube!\nCube already connected.");
         }
     }
 
-    void WriteR()
+    [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
+    public void Disconnect()
     {
-        port.WriteLine("fo1r255g100b0t1000");
-    }
-    void WriteG()
-    {
-        port.WriteLine("fo2r100g255b0t1000");
-    }
-    void WriteB()
-    {
-        port.WriteLine("fo3r0g2550b100t1000");
-    }
-    void WriteO()
-    {
-        port.WriteLine("fo4r0g100b255t1000");
-    }
-    void WriteT()
-    {
-        port.WriteLine("fo5r255g0b100t1000");
+        if (connected)
+        {
+            connected = false;
+            connectionAttempt = false;
+
+            if (connectionHandlerThread != null) { connectionHandlerThread.Abort(); }
+            if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
+
+            if (port != null)
+            {
+                if (port.IsOpen)
+                {
+                    port.WriteLine("+DISC");
+                    port.Close();
+                }
+            }
+            Debug.Log("Cube disconnected");
+        }
+        else
+        {
+            Debug.Log("Unable to disconnect from Cube!\nCube not connected.");
+        }
+
     }
 
-    void OpenConnection()
+    [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
+    public void CancelConnectionAttempt()
     {
-        while (!abortConnect)
+        connected = false;
+        connectionAttempt = false;
+
+        if (connectionHandlerThread != null) { connectionHandlerThread.Abort(); }
+        if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
+
+        if (port != null)
         {
-            //connect to a cube by handshaking with the cube firmware
-            string[] ports = SerialPort.GetPortNames();
-            Debug.Log("Available ports: "+ String.Join("   ",
-             new List<string>(ports)
-             .ConvertAll(i => i.ToString())
-             .ToArray()));
+            if (port.IsOpen)
+            {
+                port.WriteLine("+DISC");
+            }
+            port.Close();
+            Debug.Log("Port closed");
+        }
+        Debug.Log("Connection attempt cancelled");
+    }
+
+    public void SendCommand(string message)
+    {
+        Debug.Log("Sending command:\n" + message);
+        outMessages.Enqueue(message);
+    }
+
+    public void SetAllLeds(CubeColor c)
+    {
+        SendCommand("ar" + c.r + "g" + c.g + "b" + c.b);
+    }
+    public void FadeAllLeds(CubeColor c, int t)
+    {
+        SendCommand("far" + c.r + "g" + c.g + "b" + c.b + "t" + t);
+    }
+
+    public void SetLed(int f, CubeColor c)
+    {
+        SendCommand("l" + f + "r" + c.r + "g" + c.g + "b" + c.b);
+
+    }
+    public void FadeLed(int f, CubeColor c, int t)
+    {
+        SendCommand("fo" + f + "r" + c.r + "g" + c.g + "b" + c.b + "t" + t);
+    }
+
+    public void SetLedBrightness(int b)
+    {
+        brightness = b;
+        SendCommand("b" + b);
+    }
+
+    public void IncreaseLedsBrightness()
+    {
+        brightness = brightness + 20;
+        if (brightness > 200) brightness = 200;
+        SetLedBrightness(brightness);
+    }
+
+    public void DecreaseLedsBrightness()
+    {
+        brightness = brightness - 20;
+        if (brightness < 20) brightness = 20;
+        SetLedBrightness(brightness);
+    }
+
+    public bool IsConnected()
+    {
+        return connected;
+    }
+
+    public Quaternion GetRotation()
+    {
+        return cubeRotation;
+    }
+
+    public int GetVoltage()
+    {
+        return voltage;
+    }
+
+    public int GetLedBrightness()
+    {
+        return brightness;
+    }
+
+    /* ################################
+     * ####### Private Methods ########
+     * ################################ */
+
+    private void T_OpenConnection()
+    {
+        while (connectionAttempt)
+        {
+            string[] ports;
+            if (fixedCOMPort)
+            {
+                ports = new string[1];
+                ports[0] = debugCOMPort;
+            }
+            else
+            {
+                //connect to a cube by handshaking with the cube firmware
+                ports = SerialPort.GetPortNames();
+                Debug.Log("Available ports: " + String.Join("   ",
+                 new List<string>(ports)
+                 .ConvertAll(i => i.ToString())
+                 .ToArray()));
+            }
+
             //cycle through all the com ports
             for (int i = 0; i < ports.Length; i++)
             {
-                if (abortConnect) return;
+                if (!connectionAttempt) return;
                 port = new SerialPort(ports[i], baudRate);
-                port.ReadTimeout = 500;
-                port.WriteTimeout = 500;
+                port.ReadTimeout = 100;
+                port.WriteTimeout = 100;
                 try
                 {
                     port.Open();
                     if (port.IsOpen)
                     {
-                        port.WriteLine("cc");
-                        Thread.Sleep(50);
-                        string response = "";
-                        response = port.ReadLine();
-                        if (response.Contains("y"))
+                        if (TestForCube())
                         {
-                            print(ports[i] + ": success");
-                            connectionEstablished = true;
-                            port.WriteLine("ar0g0b0");
+                            print(ports[i] + "\nconnected successfully");
+                            SetAllLeds(CubeColor.black);
+                            SetLedBrightness(defaultBrightness);
+                            connected = true;
+                            connectionAttempt = false;
+                            communicationHandlerThread = new Thread(T_SendReceive);
+                            communicationHandlerThread.Start();
                             return;
                         }
                         port.Close();
-                        return;
                     }
+                    port.Close();
                 }
-                catch { print(ports[i] + ": failed"); }
+                catch
+                {
+                    port.Close();
+                    Debug.Log(ports[i] + ": failed"); }
             }
         }
     }
 
-    void WaitForInput()
+    private void T_SendReceive()
     {
-        while(!connectionEstablished) ;
-        while(!abortConnect)
+        while (connected && port.IsOpen)
         {
-            if (abortConnect || !port.IsOpen) return;
-
-            if(port.BytesToRead > 3)
+            if (port.BytesToRead > 0)
             {
-                string message = "";                
-                while (port.BytesToRead > 0)
-                {
-                    char next = (char)port.ReadChar();
-                    message += next;
-                }
-                messages.Enqueue(message);
+                string message = port.ReadLine();
+                inMessages.Enqueue(message);
             }
+            if (outMessages.Count > 0)
+            {
+                port.WriteLine(outMessages.Dequeue());
+            }
+            if(cubeTimeoutTimer > connectionTimeout)
+            {
+                port.Close();
+                Debug.Log("Cube connection timed out!");
+                cubeTimeoutTimer = 0f;
+                Disconnect();
+            }
+            Thread.Sleep(10);
         }
+    }
+
+    private bool TestForCube()
+    {
+        port.WriteLine("cc");
+        Thread.Sleep(20);
+        if (port.BytesToRead > 0)
+        {
+            string response = port.ReadLine();
+            return response.Contains("y");
+        }
+        return false;
     }
 
     private void OnApplicationQuit()
     {
-        abortConnect = true;
-
-        if (port.IsOpen)
-        {
-            port.WriteLine("+DISC");
-            port.Close();
-        }
-
-        connectionHandler.Abort();
+        Disconnect();
     }
 }
