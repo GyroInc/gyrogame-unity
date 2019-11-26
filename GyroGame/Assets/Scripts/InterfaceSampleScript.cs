@@ -12,7 +12,7 @@ public class InterfaceSampleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //HardwareInterface.active.Connect();
+        HardwareInterface.active.Connect();
     }
 
     // Update is called once per frame

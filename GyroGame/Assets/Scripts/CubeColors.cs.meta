@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:GyroGame/Assets/Scripts/MechanicTestController.cs.meta
-guid: 02c5e1a6e51b4a643930e45d8af3b438
-=======
-guid: 19ddf410eee480d45b91aa8786e84609
->>>>>>> testing-gyro:GyroGame/Assets/Scripts/CubeColors.cs.meta
+guid: de9c1de6165416941947780fbbf75872
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
