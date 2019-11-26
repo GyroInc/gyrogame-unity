@@ -16,7 +16,7 @@ public class HardwareInterface : MonoBehaviour
     [Header("Preferences")]
     public int baudRate = 38400;
     public int defaultBrightness;
-    public float connectionTimeout;
+    private float connectionTimeout = 6.5f;
 
     [Header("Debug Settings")]
     public bool debugQuaternion;
@@ -24,7 +24,7 @@ public class HardwareInterface : MonoBehaviour
     public string debugCOMPort;
 
     [Header("Status Information")]
-    public bool connected;
+    private bool connected;
     public Quaternion cubeRotation;
 
     private int voltage, brightness;
