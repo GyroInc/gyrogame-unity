@@ -281,7 +281,8 @@ public class HardwareInterface : MonoBehaviour
                 catch
                 {
                     port.Close();
-                    Debug.Log(ports[i] + ": failed"); }
+                    Debug.Log(ports[i] + ": failed");
+                }
             }
         }
     }
@@ -299,7 +300,7 @@ public class HardwareInterface : MonoBehaviour
             {
                 port.WriteLine(outMessages.Dequeue());
             }
-            if(cubeTimeoutTimer > connectionTimeout)
+            if (cubeTimeoutTimer > connectionTimeout)
             {
                 port.Close();
                 Debug.Log("Cube connection timed out!");
@@ -324,6 +325,13 @@ public class HardwareInterface : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Disconnect();
+        if (connected)
+        {
+            Disconnect();
+        }
+        else if (connectionAttempt)
+        {
+            CancelConnectionAttempt();
+        }
     }
 }
