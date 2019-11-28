@@ -16,6 +16,6 @@ public class CubeColor
     public static CubeColor green = new CubeColor(0, 255, 0);
     public static CubeColor blue = new CubeColor(0, 0, 255);
     public static CubeColor black = new CubeColor(0, 0, 0);
-    public static CubeColor orange = new CubeColor(255, 100, 0);
+    public static CubeColor orange = new CubeColor(255, 80, 0);
 
 }

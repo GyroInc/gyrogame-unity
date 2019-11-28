@@ -13,7 +13,7 @@ public class DemoScene : MonoBehaviour
     
     void OnCubeConnected()
     {
-        HardwareInterface.active.FadeAllLeds(CubeColor.black, 1000);
+        HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
     }
 
     // Update is called once per frame

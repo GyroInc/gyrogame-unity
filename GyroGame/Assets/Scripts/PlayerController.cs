@@ -185,4 +185,29 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(180, 0, 0);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Rotatable")
+        {
+            //This will make the player a child of the Obstacle
+            //Vector3 tempvel = GetComponent<Rigidbody>().velocity;
+            gameObject.transform.parent = other.gameObject.transform.parent; //Change "myPlayer" to your player
+            //GetComponent<Rigidbody>().velocity = tempvel;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Rotatable")
+        {
+            //This will make the player a child of the Obstacle
+            gameObject.transform.parent = other.gameObject.transform.parent; //Change "myPlayer" to your player
+        }
+    }
+
+        void OnTriggerExit(Collider other)
+    {
+        gameObject.transform.parent = null;
+    }
 }
