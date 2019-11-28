@@ -20,11 +20,11 @@ public class HardwareInterface : MonoBehaviour
     private float connectionTimeout = 6.5f;
 
     [Header("Debug Settings")]
-    public bool debugMessages = false;  
+    public bool debugMessages = false;
     public bool fixedCOMPort;
     public string debugCOMPort;
 
-    [Header("Status Information")]   
+    [Header("Status Information")]
     [ReadOnly] public bool connected;
     [ReadOnly] public Quaternion cubeRotation;
 
@@ -124,38 +124,38 @@ public class HardwareInterface : MonoBehaviour
     {
         if (connected)
         {
-            connected = false;
-            connectionAttempt = false;
-
             if (connectionHandlerThread != null) { connectionHandlerThread.Abort(); }
-            if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
+
+            ResetConnection();
 
             if (port != null)
             {
                 if (port.IsOpen)
                 {
-                    port.WriteLine("+DISC");
+                    SendSpamCommand("+DISC");
                     port.Close();
                 }
             }
             Debug.Log("Cube disconnected");
-            if(CubeDisconnectedEvent != null)
+            if (CubeDisconnectedEvent != null)
             {
                 CubeDisconnectedEvent();
             }
+
+            if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
+
         }
         else
         {
             Debug.Log("Unable to disconnect from Cube!\nCube not connected.");
         }
-
     }
+
 
     [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
     public void CancelConnectionAttempt()
     {
-        connected = false;
-        connectionAttempt = false;
+        ResetConnection();
 
         if (connectionHandlerThread != null) { connectionHandlerThread.Abort(); }
         if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
@@ -164,10 +164,10 @@ public class HardwareInterface : MonoBehaviour
         {
             if (port.IsOpen)
             {
-                port.WriteLine("+DISC");
+                SendSpamCommand("+DISC");
             }
             port.Close();
-            Debug.Log("Port closed");
+            Debug.Log("Port closed after cancel");
         }
         Debug.Log("Connection attempt cancelled");
     }
@@ -246,7 +246,7 @@ public class HardwareInterface : MonoBehaviour
     {
         CubeDisconnectedEvent += new CubeStatusChangeHandler(method);
     }
-    
+
 
     /* ################################
      * ####### Private Methods ########
@@ -281,34 +281,35 @@ public class HardwareInterface : MonoBehaviour
                 port.WriteTimeout = 100;
                 try
                 {
+                    Debug.Log("trying " + ports[i]);
                     port.Open();
-                    if (port.IsOpen)
-                    {
-                        if (TestForCube())
-                        {
-                            print(ports[i] + "\nconnected successfully");
-                            SetAllLeds(CubeColor.black);
-                            SetLedBrightness(defaultBrightness);
-                            connected = true;
-                            connectionAttempt = false;
-                            if (CubeConnectedEvent != null)
-                            {
-                                CubeConnectedEvent();
-                            }
-                            communicationHandlerThread = new Thread(T_SendReceive);
-                            communicationHandlerThread.Start();
-                            return;
-                        }
-                        port.Close();
-                    }
-                    port.Close();
                 }
                 catch
                 {
                     port.Close();
                     Debug.Log(ports[i] + ": failed");
+                    continue;
+                }
+                if (port.IsOpen)
+                {
+                    if (TestForCube())
+                    {
+                        Debug.Log("Cube connected successfully at " + ports[i]);
+                        SetAllLeds(CubeColor.black);
+                        SetLedBrightness(defaultBrightness);
+                        connected = true;
+                        connectionAttempt = false;
+                        if (CubeConnectedEvent != null)
+                        {
+                            CubeConnectedEvent();
+                        }
+                        communicationHandlerThread = new Thread(T_SendReceive);
+                        communicationHandlerThread.Start();
+                        return;
+                    }
                 }
             }
+            port.Close();
         }
     }
 
@@ -323,29 +324,53 @@ public class HardwareInterface : MonoBehaviour
             }
             if (outMessages.Count > 0)
             {
-                port.WriteLine(outMessages.Dequeue());
+                SendSpamCommand(outMessages.Dequeue());
             }
             if (cubeTimeoutTimer > connectionTimeout)
             {
-                port.Close();
                 Debug.Log("Cube connection timed out!");
                 cubeTimeoutTimer = 0f;
                 Disconnect();
             }
-            Thread.Sleep(10);
+            Thread.Sleep(5);
         }
     }
 
     private bool TestForCube()
     {
+        Debug.Log("Sending confirmation message");
         port.WriteLine("cc");
-        Thread.Sleep(20);
-        if (port.BytesToRead > 0)
+        port.DiscardInBuffer();
+        try
         {
             string response = port.ReadLine();
+            Debug.Log("Confirmation Response: " + response);
             return response.Contains("y");
         }
-        return false;
+        catch
+        {
+            Debug.Log("Response Read timeout");
+            return false;
+        }
+        
+
+    }
+
+    private void SendSpamCommand(string command)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            port.WriteLine(command);
+        }
+    }
+
+    private void ResetConnection()
+    {
+        connected = false;
+        connectionAttempt = false;
+        cubeTimeoutTimer = 0f;
+        inMessages.Clear();
+        outMessages.Clear();
     }
 
     private void OnApplicationQuit()

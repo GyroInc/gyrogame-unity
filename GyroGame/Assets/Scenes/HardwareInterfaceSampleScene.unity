@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -468,9 +468,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baudRate: 38400
   defaultBrightness: 100
-  debugQuaternion: 0
-  fixedCOMPort: 0
-  debugCOMPort: COM3
+  debugMessages: 0
+  fixedCOMPort: 1
+  debugCOMPort: COM7
   connected: 0
   cubeRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &1009242065
