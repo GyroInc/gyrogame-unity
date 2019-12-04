@@ -16,19 +16,23 @@ public class HardwareInterface : MonoBehaviour
 
     [Header("Preferences")]
     public int baudRate = 38400;
-    public int defaultBrightness = 100;
+    public int defaultBrightness = 128;
+    public float lowBatteryVoltage = 3;
     private float connectionTimeout = 6.5f;
 
+
     [Header("Debug Settings")]
-    public bool debugMessages = false;
     public bool fixedCOMPort;
     public string debugCOMPort;
+    public bool debugConnectionAttempt, debugMessages;
 
     [Header("Status Information")]
     [ReadOnly] public bool connected;
+    [ReadOnly] public bool batteryWarning;
+    [ReadOnly] public float voltage;
     [ReadOnly] public Quaternion cubeRotation;
 
-    private int voltage, brightness;
+    private int brightness;
     private bool connectionAttempt;
     private float cubeTimeoutTimer;
 
@@ -61,15 +65,16 @@ public class HardwareInterface : MonoBehaviour
             string message = inMessages.Dequeue();
             if (inMessages.Count > 10)
             {
-                Debug.Log("Too many messages from cube! Skipping some...");
+                Debug.LogError("Too many messages from cube! Skipping some...");
                 inMessages.Clear();
             }
+            var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            culture.NumberFormat.NumberDecimalSeparator = ".";
+
             switch (message[0])
             {
                 case 'q':
                     message = message.TrimStart('q');
-                    var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-                    culture.NumberFormat.NumberDecimalSeparator = ".";
                     string[] parts = message.Split('_');
                     cubeRotation.w = -float.Parse(parts[0], culture);
                     cubeRotation.x = float.Parse(parts[1], culture);
@@ -78,16 +83,15 @@ public class HardwareInterface : MonoBehaviour
                     cubeRotation.Normalize();
                     break;
                 case 'v':
-                    if (debugMessages)
-                    {
-                        Debug.Log("Incoming voltage:\n" + message);
-                    }
                     message = message.TrimStart('v');
-                    voltage = int.Parse(message);
+                    message = message.Insert(1, ".");
+                    if (debugMessages) Debug.Log("Incoming voltage:\n" + message + "V");
+                    voltage = float.Parse(message, culture);
+                    if (voltage < lowBatteryVoltage) batteryWarning = true; else batteryWarning = false;
                     cubeTimeoutTimer = 0f;
                     break;
                 default:
-                    Debug.Log("Unhandled incoming message from Cube\n" + message);
+                    Debug.LogError("Unhandled incoming message from Cube\n" + message);
                     break;
             }
         }
@@ -167,14 +171,13 @@ public class HardwareInterface : MonoBehaviour
                 SendSpamCommand("+DISC");
             }
             port.Close();
-            Debug.Log("Port closed after cancel");
         }
         Debug.Log("Connection attempt cancelled");
     }
 
     public void SendCommand(string message)
     {
-        Debug.Log("Sending command to cube:\n" + message);
+        if (debugMessages) Debug.Log("Sending command to cube:\n" + message);
         outMessages.Enqueue(message);
     }
 
@@ -227,7 +230,7 @@ public class HardwareInterface : MonoBehaviour
         return cubeRotation;
     }
 
-    public int GetVoltage()
+    public float GetVoltage()
     {
         return voltage;
     }
@@ -281,20 +284,20 @@ public class HardwareInterface : MonoBehaviour
                 port.WriteTimeout = 100;
                 try
                 {
-                    Debug.Log("trying " + ports[i]);
+                    if(debugConnectionAttempt) Debug.Log("trying " + ports[i]);
                     port.Open();
                 }
                 catch
                 {
                     port.Close();
-                    Debug.Log(ports[i] + ": failed");
+                    if (debugConnectionAttempt) Debug.Log(ports[i] + ": failed");
                     continue;
                 }
                 if (port.IsOpen)
                 {
                     if (TestForCube())
                     {
-                        Debug.Log("Cube connected successfully at " + ports[i]);
+                        if (debugConnectionAttempt) Debug.Log("Cube connected successfully at " + ports[i]);
                         SetAllLeds(CubeColor.black);
                         SetLedBrightness(defaultBrightness);
                         connected = true;
@@ -338,21 +341,21 @@ public class HardwareInterface : MonoBehaviour
 
     private bool TestForCube()
     {
-        Debug.Log("Sending confirmation message");
+        if (debugConnectionAttempt) Debug.Log("Sending confirmation message");
         port.WriteLine("cc");
         port.DiscardInBuffer();
         try
         {
             string response = port.ReadLine();
-            Debug.Log("Confirmation Response: " + response);
+            if (debugConnectionAttempt) Debug.Log("Confirmation Response: " + response);
             return response.Contains("y");
         }
         catch
         {
-            Debug.Log("Response Read timeout");
+            Debug.LogError("Response Read timeout");
             return false;
         }
-        
+
 
     }
 
