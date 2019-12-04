@@ -1,19 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//---------------------------------------------------------------------
-//                     Written by Simon König
-//---------------------------------------------------------------------
 
-
-
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     public AnimationCurve AxisPressResponse;
     public AnimationCurve AxisReleaseResponse;
     public Transform pCamera;
 
-    
+
     public float movSpeedMult = 1;
     public float lookSpeed = 3;
 
@@ -38,7 +33,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = lockMode;
     }
 
-    void Start()
+    private void Start()
     {
         Time.fixedDeltaTime = 1f / 200f;
         rb = GetComponent<Rigidbody>();
@@ -51,11 +46,13 @@ public class PlayerController : MonoBehaviour
         rotx += Input.GetAxis("Mouse Y");
         rotx = Mathf.Clamp(rotx, -30, 30);
         pCamera.localEulerAngles = new Vector2(-rotx, 0) * lookSpeed;
-        transform.localEulerAngles = new Vector3(0, roty) * lookSpeed;
+        //deprecated, needs to be gravity fixed
+        //transform.localEulerAngles = new Vector3(0, roty) * lookSpeed;
+        //fixed :)
+        SetAbsRotOnYGravityFixed(roty * lookSpeed);
 
-        //new Move
-        //button times
-        #region Button stuff
+        //Input evaluation
+        #region Button input stuff
         if (Input.GetKeyDown(KeyCode.W))
             tw = 0;
         if (Input.GetKeyDown(KeyCode.A))
@@ -68,37 +65,37 @@ public class PlayerController : MonoBehaviour
         {
             tw += Time.deltaTime;
             pw = true;
-        }            
+        }
         if (Input.GetKey(KeyCode.A))
         {
             ta += Time.deltaTime;
             pa = true;
-        }            
+        }
         if (Input.GetKey(KeyCode.S))
         {
             ts += Time.deltaTime;
             ps = true;
-        }            
+        }
         if (Input.GetKey(KeyCode.D))
         {
             td += Time.deltaTime;
             pd = true;
-        }          
+        }
         if (Input.GetKeyUp(KeyCode.W))
         {
             tw = 0;
             pw = false;
-        }        
+        }
         if (Input.GetKeyUp(KeyCode.A))
         {
             ta = 0;
             pa = false;
-        }            
+        }
         if (Input.GetKeyUp(KeyCode.S))
         {
             ts = 0;
             ps = false;
-        }            
+        }
         if (Input.GetKeyUp(KeyCode.D))
         {
             td = 0;
@@ -133,81 +130,40 @@ public class PlayerController : MonoBehaviour
 
         velV = Mathf.Abs(valw) > Mathf.Abs(vals) ? valw : -vals;
         velH = Mathf.Abs(vald) > Mathf.Abs(vala) ? vald : -vala;
+        //inputs complete
 
-        if (rb.SweepTestAll((transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized, 0.3f).Length == 0 || rb.velocity.y == 0)
-            rb.velocity = (transform.forward * velV * movSpeedMult) + (transform.right * velH * movSpeedMult) + (new Vector3(0, rb.velocity.y, 0));
+        //always be relative to own body
+        Vector3 input = (transform.rotation * Vector3.forward * velV * movSpeedMult) + (transform.rotation * Vector3.right * velH * movSpeedMult);
+        Vector3 gravityPart = Vector3.Scale(new Vector3(Mathf.Abs(Physics.gravity.normalized.x), Mathf.Abs(Physics.gravity.normalized.y), Mathf.Abs(Physics.gravity.normalized.z)), rb.velocity);
+        rb.velocity = input + gravityPart;
+
+        //sweep test for collision detection
+        if (rb.SweepTestAll(input, 1f).Length == 0 || gravityPart.magnitude == 0)
+            rb.velocity = input + gravityPart;
         else
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.velocity = gravityPart;
 
-        Debug.DrawRay(transform.position, (transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized * 0.3f);
-            
-
-        //jump
-        if(Input.GetKeyDown(KeyCode.Space))
+        //jump        
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(rb.velocity.y > 0)
-                rb.AddForce(new Vector3(0, jumpForce - rb.velocity.y * 3, 0), ForceMode.Impulse);
-            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            if(gravityPart.magnitude < 0.2f && gravityPart.magnitude > -0.2f)
+                rb.AddForce(-Physics.gravity.normalized * jumpForce, ForceMode.Impulse);
         }
-            
 
         //better jump cuz no one cares about physics
-        if (rb.velocity.y < jumpSpeedCutoff)
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMult - 1f) * Time.deltaTime;
-        else if(rb.velocity.y > jumpSpeedCutoff && !Input.GetKey(KeyCode.Space))
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMult - 1f) * Time.deltaTime;
+        Vector3 gravityVector = new Vector3(Physics.gravity.normalized.x, Physics.gravity.normalized.y, Physics.gravity.normalized.z);
+        float gravityVelocity = Vector3.Scale(-Physics.gravity, rb.velocity).x + Vector3.Scale(-Physics.gravity, rb.velocity).y + Vector3.Scale(-Physics.gravity, rb.velocity).z;
+        if (gravityVelocity < jumpSpeedCutoff)
+            rb.velocity += gravityVector * (fallMult - 1f) * Time.deltaTime;
+        else if (gravityVelocity > jumpSpeedCutoff && !Input.GetKey(KeyCode.Space))
+            rb.velocity += gravityVector * (lowJumpMult - 1f) * Time.deltaTime;
+
+        //debug
+        Debug.DrawRay(transform.position, (transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized * 0.3f);
     }
 
-    public void ChangeGravity(Vector3 grav)
+    void SetAbsRotOnYGravityFixed(float degrees)
     {
-        if(grav.x > 0)
-        {
-            transform.Rotate(0, 0, 90);
-        }
-        if (grav.x < 0)
-        {
-            transform.Rotate(0, 0, -90);
-        }
-        if (grav.y > 0)
-        {
-            transform.Rotate(180, 0, 0);
-        }
-        if (grav.y < 0)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0, transform.eulerAngles.y, 0));
-        }
-        if (grav.z > 0)
-        {
-            transform.Rotate(180, 0, 0);
-        }
-        if (grav.z < 0)
-        {
-            transform.Rotate(180, 0, 0);
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Rotatable")
-        {
-            //This will make the player a child of the Obstacle
-            //Vector3 tempvel = GetComponent<Rigidbody>().velocity;
-            gameObject.transform.parent = other.gameObject.transform.parent; //Change "myPlayer" to your player
-            //GetComponent<Rigidbody>().velocity = tempvel;
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Rotatable")
-        {
-            //This will make the player a child of the Obstacle
-            gameObject.transform.parent = other.gameObject.transform.parent; //Change "myPlayer" to your player
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        gameObject.transform.parent = null;
+        transform.localRotation = Quaternion.FromToRotation(Vector3.up, -Physics.gravity) * Quaternion.Euler(0, degrees, 0);
     }
 }

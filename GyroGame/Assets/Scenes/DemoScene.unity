@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1906,8 +1906,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 20.000004, y: 1.13, z: 3.0000007}
-  m_Center: {x: 9.999999, y: 1.03, z: -1.5000004}
+  m_Size: {x: 20.000004, y: -0.02, z: 3.0000007}
+  m_Center: {x: 9.999999, y: 0.48, z: -1.5000004}
 --- !u!1 &1045759541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,7 +2411,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh11550
+  m_Name: pb_Mesh41452
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7819,7 +7819,7 @@ MonoBehaviour:
   defaultBrightness: 128
   debugMessages: 0
   fixedCOMPort: 1
-  debugCOMPort: COM7
+  debugCOMPort: COM4
   connected: 0
   cubeRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &1844375355
