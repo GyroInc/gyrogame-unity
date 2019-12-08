@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 916193989226121828}
   - component: {fileID: 2053750091292155071}
   - component: {fileID: 514433700}
+  - component: {fileID: 1345848315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -72,14 +73,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916193989226121834}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed80c03cc8e2c4e4583c15fe8d535802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 0}
   selectionRange: 100
-  rotationInterpolation: 0.2
+  rotationInterpolation: 0.08
+  angleSnap: 10
+  unselectedColor: {r: 0.2249911, g: 0.4222868, b: 0.6037736, a: 1}
+  selectedColor: {r: 0, g: 0.5754717, b: 0.00001262269, a: 0}
 --- !u!114 &514433700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,12 +154,28 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   pCamera: {fileID: 916193989514722672}
-  movSpeedMult: 8
+  movSpeedMult: 5
   lookSpeed: 3
-  jumpForce: 10
+  jumpForce: 5
   fallMult: 20
   lowJumpMult: 15
   jumpSpeedCutoff: 10
+--- !u!114 &1345848315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916193989226121834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f17da12bc185ecb4cbea50e5f4af3516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absoluteCube: {fileID: 0}
+  relativeCube: {fileID: 0}
+  correctedCube: {x: 0, y: 0, z: 0, w: 0}
+  cubeEulers: {x: 0, y: 0, z: 0}
 --- !u!1 &916193989514722677
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class OffsetTestScript : MonoBehaviour
 {
+    public static OffsetTestScript active;
     public Transform absoluteCube;
     public Transform relativeCube;
 
-    Quaternion correctedCube;
+    public Quaternion correctedCube = Quaternion.identity;
+    public Vector3 cubeEulers;
     Quaternion playerPerspectiveCorrection = Quaternion.identity;
 
     int calibrationStep = 0;
@@ -15,6 +17,7 @@ public class OffsetTestScript : MonoBehaviour
 
     private void Start()
     {
+        active = this;
         HardwareInterface.active.Connect();
     }
 
@@ -22,10 +25,14 @@ public class OffsetTestScript : MonoBehaviour
     {
         if (HardwareInterface.active.IsConnected())
         {
-            absoluteCube.rotation = HardwareInterface.active.GetRotation();
+            if(absoluteCube != null)
+                absoluteCube.rotation = HardwareInterface.active.GetRotation();
+            
             correctedCube = Quaternion.Euler(new Vector3(0, yawOffset, 0)) * HardwareInterface.active.GetRotation();
+            cubeEulers = correctedCube.eulerAngles;
 
-            relativeCube.rotation = playerPerspectiveCorrection * correctedCube;
+            if (relativeCube != null)
+                relativeCube.rotation = playerPerspectiveCorrection * correctedCube;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -33,11 +40,11 @@ public class OffsetTestScript : MonoBehaviour
                 {
                     case 0:
                         HardwareInterface.active.SetLed(5, CubeColor.green);
-                        HardwareInterface.active.SetLed(1, CubeColor.orange);
+                        HardwareInterface.active.SetLed(1, CubeColor.red);
                         calibrationStep++;
                         break;
                     case 1:
-                        yawOffset = HardwareInterface.active.GetRotation().eulerAngles.y;
+                        yawOffset = -HardwareInterface.active.GetRotation().eulerAngles.y;
                         HardwareInterface.active.SetLed(5, CubeColor.black);
                         HardwareInterface.active.SetLed(1, CubeColor.black);
                         break;

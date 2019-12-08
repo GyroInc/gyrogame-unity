@@ -8,17 +8,25 @@ public class ObstacleMover : MonoBehaviour
     public float selectionRange;
 
     public float rotationInterpolation = 0.2f;
+    public float angleSnap;
 
-    Color orgColor;
-    Color targetColor;
+    public Color unselectedColor;
+    public Color selectedColor;
 
     bool selectionActive = false;
 
     Quaternion offset;
+    bool offsetSet = false;
 
     private void Start()
     {
+        HardwareInterface.active.Connect();
+        HardwareInterface.active.OnCubeConnected(OnCubeConnected);
+    }
 
+    void OnCubeConnected()
+    {
+        HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
     }
 
     void Update()
@@ -33,26 +41,29 @@ public class ObstacleMover : MonoBehaviour
                 if (hit.transform.tag == "Rotatable")
                 {
                     selected = hit.transform.gameObject;
-                    offset = Quaternion.Inverse(selected.transform.parent.rotation);
+                    if(!offsetSet)
+                    {
+                        offset = selected.transform.parent.rotation * Quaternion.Euler(Vector3.right);
+                        offsetSet = true;
+                    }
+                        
 
                     //color stuff
-                    orgColor = selected.transform.GetComponent<MeshRenderer>().material.color;
-                    targetColor = Color.green;
                     HardwareInterface.active.FadeAllLeds(CubeColor.green, 1000);
                     selectionActive = true;
                 }
                 else
                 {
-                    targetColor = orgColor;
                     HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
                     selectionActive = false;
+                    offsetSet = false;
                 }
             }
             else
             {
-                targetColor = orgColor;
                 HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
                 selectionActive = false;
+                offsetSet = false;
             }
         }
 
@@ -60,14 +71,27 @@ public class ObstacleMover : MonoBehaviour
         {
             if(HardwareInterface.active.IsConnected())
             {
-                selected.transform.parent.rotation = Quaternion.Slerp(selected.transform.parent.rotation, HardwareInterface.active.GetRotation(), rotationInterpolation);
+                //snap angles
+                Quaternion inputAngle = HardwareInterface.active.GetRotation() * offset; //OffsetTestScript.active.correctedCube * offset;
+                Quaternion outputAngle = inputAngle;
+                float x = Mathf.RoundToInt((inputAngle.eulerAngles.x / 360f) * 4f) * 90;
+                float y = Mathf.RoundToInt((inputAngle.eulerAngles.y / 360f) * 4f) * 90;
+                float z = Mathf.RoundToInt((inputAngle.eulerAngles.z / 360f) * 4f) * 90;
+                Quaternion clippedAngle = Quaternion.Euler(x, y, z);
+                if (Mathf.Abs(inputAngle.eulerAngles.y) % 90 > 90 - angleSnap || Mathf.Abs(inputAngle.eulerAngles.y) % 90 < angleSnap)
+                    outputAngle = clippedAngle;
+
+                selected.transform.parent.rotation = Quaternion.Slerp(selected.transform.parent.rotation, outputAngle, rotationInterpolation);
             }
         }
 
         if(selected != null)
         {
             //lerp colors
-            selected.transform.GetComponent<MeshRenderer>().material.color = Color.Lerp(selected.transform.GetComponent<MeshRenderer>().material.color, targetColor, Time.deltaTime);
+            if(selectionActive)
+                selected.transform.GetComponent<MeshRenderer>().material.color = Color.Lerp(selected.transform.GetComponent<MeshRenderer>().material.color, selectedColor, Time.deltaTime * 3);
+            else
+                selected.transform.GetComponent<MeshRenderer>().material.color = Color.Lerp(selected.transform.GetComponent<MeshRenderer>().material.color, unselectedColor, Time.deltaTime * 3);
         }
     }
 }

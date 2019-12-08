@@ -46,10 +46,10 @@ MonoBehaviour:
   baudRate: 38400
   defaultBrightness: 128
   lowBatteryVoltage: 3
-  fixedCOMPort: 0
-  debugCOMPort: COM7
-  debugConnectionAttempt: 1
-  debugMessages: 1
+  fixedCOMPort: 1
+  debugCOMPort: COM4
+  debugConnectionAttempt: 0
+  debugMessages: 0
   connected: 0
   batteryWarning: 0
   voltage: 0
