@@ -1,14 +1,7 @@
 # GyroGame - Software Requirements Specification
 
-## Revision History
-
-| Date       |  Version | Description       |
-| --------   | -------- | ----------------- |
-| 21/10/2019 |   1.0    | initial version   | 
-
 ## Table of Contents
 - [GyroGame - Software Requirements Specification](#gyrogame---software-requirements-specification)
-  - [Revision History](#revision-history)
   - [Table of Contents](#table-of-contents)
   - [1. Introduction](#1-introduction)
     - [1.1 Purpose](#11-purpose)
@@ -19,7 +12,8 @@
   - [2. Overall Description](#2-overall-description)
     - [2.1 Vision](#21-vision)
     - [2.2 Overall Use-Case-Diagram](#22-overall-use-case-diagram)
-    - [2.3 User Characteristics](#23-user-characteristics)
+    - [2.3 Use Cases](#23-use-cases)
+    - [2.4 User Characteristics](#24-user-characteristics)
   - [3. Specific Requirements](#3-specific-requirements)
     - [3.1 Functionality](#31-functionality)
       - [3.1.1 Functionality - The Controller](#311-functionality---the-controller)
@@ -58,20 +52,21 @@ This document is designed for internal use only and will outline the development
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 
-| Term     |                                     |
-| -------- | ----------------------------------- |
-| **SRS**  | Software Requirements Specification |
-| **Unity**| The used game engine                |
-| **AAA**  | A very high budget game              |
+| Term      |                                              |
+| --------- | -------------------------------------------- |
+| **SRS**   | Software Requirements Specification          |
+| **Unity** | Open Source Game Engine used in this project |
+| **AAA**   | A very high budget game                      |
 
 ### 1.4 References
 
-| Title                                                                 | Date       |
-| --------------------                                                  | ---------- |
-| [**Blog**](https://gyrogame.de/)                                          | 19/10/2019 |
-| [**GitHub - Unity Project**](https://github.com/Manut38/gyrogame-unity)              | 19/10/2019 |
-| [**GitHub - Controller Firmware**](https://github.com/Manut38/gyrogame-hardware)     | 19/10/2019 |
-| [**Use Case Diagram**](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.PNG)                                                | 21/10/2018 |
+| Title                                                                                                        | Date       |
+| ------------------------------------------------------------------------------------------------------------ | ---------- |
+| [**Blog**](https://gyrogame.de/)                                                                             | 19/10/2019 |
+| [**GitHub - Unity Project**](https://github.com/Manut38/gyrogame-unity)                                      | 19/10/2019 |
+| [**GitHub - Controller Firmware**](https://github.com/Manut38/gyrogame-hardware)                             | 19/10/2019 |
+| [**YouTrack Project Management**](https://youtrack.gyrogame.de)                                              | 10/12/2019 |
+| [**Overall Use-Case-Diagram**](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.PNG) | 21/10/2019 |
 
 ### 1.5 Overview
 
@@ -85,9 +80,20 @@ The goal of GyroGame is to create a new kind of game for gamers that are also ma
 
 ### 2.2 Overall Use-Case-Diagram
 
-![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.PNG)
+![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.svg)
 
-### 2.3 User Characteristics
+### 2.3 Use Cases
+
+[Use Case: Player Movement](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
+
+[Use Case: Pause Menu](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_PauseMenu.md)
+
+[Use Case: Connect Control Cube](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_ConnectCube.md)
+
+[Use Case: Rotate Obstacle](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
+
+
+### 2.4 User Characteristics
 
 Our main target group consists of people who like to play video games but also like to build electronics projects.
 
