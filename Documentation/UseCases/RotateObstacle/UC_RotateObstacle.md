@@ -3,7 +3,7 @@
 # Use-Case Specification: Rotate Obstacle <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
-- [Cube Communication](#cube-communication)
+- [Rotate Obstacle](#rotate-obstacle)
   - [1.1 Brief Description](#11-brief-description)
 - [2. Flow of Events](#2-flow-of-events)
   - [2.1 Basic Flow](#21-basic-flow)
@@ -12,8 +12,9 @@
 - [3. Special Requirements](#3-special-requirements)
 - [4. Preconditions](#4-preconditions)
 - [4.1 Cube Connected](#41-cube-connected)
+- [4.2 Obstacle active](#42-obstacle-active)
 - [5. Postconditions](#5-postconditions)
-  - [5.1 Execute command in cube firmware](#51-execute-command-in-cube-firmware)
+  - [5.1 Rotation](#51-rotation)
 - [6. Extension Points](#6-extension-points)
 
 ## Rotate Obstacle
