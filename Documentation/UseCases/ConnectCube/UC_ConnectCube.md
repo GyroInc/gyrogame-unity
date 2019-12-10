@@ -24,7 +24,7 @@
 ### 1.1 Brief Description
 As a requirement every player has to be able to connect the control cube to the game instance.
 
-The title menu includes a button for this function.
+The title and the escape menu include a button for this function.
 ## 2. Flow of Events
 
 ### 2.1 Basic Flow
@@ -44,7 +44,7 @@ The title menu includes a button for this function.
 ## 4. Preconditions
 
 ## 4.1 Title menu visible
-The title menu has to be currently visible.
+The title or escape menu has to be visible.
 
 ## 4.2 Cube powered on
 The cube has to be powered on and in pairing mode.
