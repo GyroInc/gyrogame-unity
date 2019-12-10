@@ -225,6 +225,11 @@ public class HardwareInterface : MonoBehaviour
         return connected;
     }
 
+    public bool isAttemptingConnection()
+    {
+        return connectionAttempt;
+    }
+
     public Quaternion GetRotation()
     {
         return cubeRotation;
@@ -342,17 +347,17 @@ public class HardwareInterface : MonoBehaviour
     private bool TestForCube()
     {
         if (debugConnectionAttempt) Debug.Log("Sending confirmation message");
-        port.WriteLine("cc");
-        port.DiscardInBuffer();
         try
         {
+            port.WriteLine("cc");
+            port.DiscardInBuffer();
             string response = port.ReadLine();
             if (debugConnectionAttempt) Debug.Log("Confirmation Response: " + response);
             return response.Contains("y");
         }
         catch
         {
-            Debug.LogError("Response Read timeout");
+            Debug.Log("Confirmation timeout");
             return false;
         }
 
