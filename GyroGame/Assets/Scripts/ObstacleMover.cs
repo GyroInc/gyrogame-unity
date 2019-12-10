@@ -20,7 +20,7 @@ public class ObstacleMover : MonoBehaviour
 
     private void Start()
     {
-        HardwareInterface.active.Connect();
+        //HardwareInterface.active.Connect();
         HardwareInterface.active.OnCubeConnected(OnCubeConnected);
     }
 
