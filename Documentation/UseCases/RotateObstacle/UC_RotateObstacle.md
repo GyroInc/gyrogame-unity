@@ -11,8 +11,8 @@
     - [2.1.2 Mock Up](#212-mock-up)
 - [3. Special Requirements](#3-special-requirements)
 - [4. Preconditions](#4-preconditions)
-- [4.1 Cube Connected](#41-cube-connected)
-- [4.2 Obstacle active](#42-obstacle-active)
+  - [4.1 Cube Connected](#41-cube-connected)
+  - [4.2 Obstacle active](#42-obstacle-active)
 - [5. Postconditions](#5-postconditions)
   - [5.1 Rotation](#51-rotation)
 - [6. Extension Points](#6-extension-points)
@@ -39,10 +39,10 @@ When the player clicks aims at a rotatable obstacle and clicks on it, he will be
 
 ## 4. Preconditions
 
-## 4.1 Cube Connected
+### 4.1 Cube Connected
 The Cube has to be powered on and connected to the game.
 
-## 4.2 Obstacle active
+### 4.2 Obstacle active
 The obstacle has to be activated by the player with a mouse click.
 
 ## 5. Postconditions
