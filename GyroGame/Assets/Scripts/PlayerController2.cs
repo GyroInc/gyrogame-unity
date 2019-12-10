@@ -41,6 +41,9 @@ public class PlayerController2 : MonoBehaviour
 
     void Update()
     {
+        if (EscapeMenu.active.escapeActive)
+            return;
+
         //look around
         roty += Input.GetAxis("Mouse X");
         rotx += Input.GetAxis("Mouse Y");
