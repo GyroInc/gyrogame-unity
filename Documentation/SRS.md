@@ -86,9 +86,9 @@ The goal of GyroGame is to create a new kind of game for gamers that are also ma
 
 [Use Case: Player Movement](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
 
-[Use Case: Pause Menu](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_PauseMenu.md)
+[Use Case: Pause Menu](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PauseMenu/UC_PauseMenu.md)
 
-[Use Case: Connect Control Cube](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_ConnectCube.md)
+[Use Case: Connect Control Cube](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/ConnectCube/UC_ConnectCube.md)
 
 [Use Case: Rotate Obstacle](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
 
