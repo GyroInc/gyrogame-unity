@@ -31,7 +31,7 @@ The title menu features a button for this function.
 
 #### 2.1.1 Activity Diagram
 
-![Activity Diagram - Player Movement](./AD_PlayerMovement.png)
+![Activity Diagram - Player Movement](./AD_PlayerMovement.svg)
 
 #### 2.1.2 Mock Up
 

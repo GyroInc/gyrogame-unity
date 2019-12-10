@@ -31,7 +31,7 @@ The title menu includes a button for this function.
 
 #### 2.1.1 Activity Diagram
 
-![Activity Diagram - Connect Controller Cube](./AD_ConnectCube.png)
+![Activity Diagram - Connect Controller Cube](./AD_ConnectCube.svg)
 
 #### 2.1.2 Mock Up
 
