@@ -13,7 +13,7 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAwIlFRQcCCCACBAhAAAAbAAAAAQBAkACSkBIAAEAEI=</HashCode>
+      <HashCode>AAwIlFRQcCCCAChEhAAAAbAAAgAQBAkACSkBJAAEAEI=</HashCode>
       <FileName>Assets\Scripts\HardwareInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -62,8 +62,22 @@
   <Class Name="ObstacleMover">
     <Position X="9" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AASAAAAAACAAAgAAAAAAAAAAAAQAAAAAAIAAAgABAEA=</HashCode>
+      <HashCode>AASCEAAAACAAAgAAAAAAAIAAAAAAAAAABIAAAgAAAEA=</HashCode>
       <FileName>Assets\Scripts\ObstacleMover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscapeMenu">
+    <Position X="9" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAACAAAAEAAAEAAAAAAAQIAAAAAAAgIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\EscapeMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerReset">
+    <Position X="6" Y="10" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerReset.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
