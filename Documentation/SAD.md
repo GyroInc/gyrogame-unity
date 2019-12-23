@@ -93,7 +93,7 @@ N/A
 
 ## 7. Deployment View
 
-![Deployment View](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/images/DeploymentView.png)
+![Deployment View](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/images/DeploymentView.svg)
 
 ## 8. Implementation View
 
