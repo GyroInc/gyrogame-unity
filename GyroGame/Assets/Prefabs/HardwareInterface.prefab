@@ -49,7 +49,7 @@ MonoBehaviour:
   fixedCOMPort: 0
   debugCOMPort: COM
   debugConnectionAttempt: 0
-  debugMessages: 0
+  debugMessages: 1
   connected: 0
   batteryWarning: 0
   voltage: 0
