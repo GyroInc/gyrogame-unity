@@ -12,9 +12,11 @@ namespace Tests
         [Test]
         public void TestPlayerControllerSimplePasses()
         {
-            //Cannot interact with unity Classes
-            //aka cannot test anything
-            Assert.IsTrue(true);
+            //Can only test unity specific functions
+            //Cannot interact with external Classes
+            //aka cannot test MonoBehaviours
+            //aka cannot test use cases
+            Assert.IsTrue(true);            
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
