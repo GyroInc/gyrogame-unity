@@ -18,17 +18,17 @@ public class OffsetTestScript : MonoBehaviour
     private void Start()
     {
         active = this;
-        HardwareInterface.active.Connect();
+        HardwareInterface.Instance.Connect();
     }
 
     void Update()
     {
-        if (HardwareInterface.active.IsConnected())
+        if (HardwareInterface.Instance.IsConnected())
         {
             if(absoluteCube != null)
-                absoluteCube.rotation = HardwareInterface.active.GetRotation();
+                absoluteCube.rotation = HardwareInterface.Instance.GetRotation();
             
-            correctedCube = Quaternion.Euler(new Vector3(0, yawOffset, 0)) * HardwareInterface.active.GetRotation();
+            correctedCube = Quaternion.Euler(new Vector3(0, yawOffset, 0)) * HardwareInterface.Instance.GetRotation();
             cubeEulers = correctedCube.eulerAngles;
 
             if (relativeCube != null)
@@ -39,14 +39,14 @@ public class OffsetTestScript : MonoBehaviour
                 switch(calibrationStep)
                 {
                     case 0:
-                        HardwareInterface.active.SetLed(5, CubeColor.green);
-                        HardwareInterface.active.SetLed(1, CubeColor.red);
+                        HardwareInterface.Instance.SetLed(5, CubeColor.green);
+                        HardwareInterface.Instance.SetLed(1, CubeColor.red);
                         calibrationStep++;
                         break;
                     case 1:
-                        yawOffset = -HardwareInterface.active.GetRotation().eulerAngles.y;
-                        HardwareInterface.active.SetLed(5, CubeColor.black);
-                        HardwareInterface.active.SetLed(1, CubeColor.black);
+                        yawOffset = -HardwareInterface.Instance.GetRotation().eulerAngles.y;
+                        HardwareInterface.Instance.SetLed(5, CubeColor.black);
+                        HardwareInterface.Instance.SetLed(1, CubeColor.black);
                         break;
                 }                
             }

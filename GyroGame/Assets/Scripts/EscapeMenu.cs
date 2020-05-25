@@ -38,7 +38,7 @@ public class EscapeMenu : MonoBehaviour
         }
 
         ColorBlock cb = connectedIndicator.colors;
-        if (HardwareInterface.active.connected)
+        if (HardwareInterface.Instance.connected)
         {
             connectedIndicator.isOn = true;
             buttonText.text = "Disconnect the Cube";
@@ -54,19 +54,19 @@ public class EscapeMenu : MonoBehaviour
 
     public void toggleCubeConnection()
     {
-        if (HardwareInterface.active.isAttemptingConnection())
+        if (HardwareInterface.Instance.isAttemptingConnection())
         {
-            HardwareInterface.active.CancelConnectionAttempt();
+            HardwareInterface.Instance.CancelConnectionAttempt();
             buttonText.text = "Connect the Cube";
         }
-        else if (HardwareInterface.active.connected)
+        else if (HardwareInterface.Instance.connected)
         {
-            HardwareInterface.active.Disconnect();
+            HardwareInterface.Instance.Disconnect();
             buttonText.text = "Connect the Cube";
         }
         else
         {
-            HardwareInterface.active.Connect();
+            HardwareInterface.Instance.Connect();
             buttonText.text = "Connecting...";
         }
     }

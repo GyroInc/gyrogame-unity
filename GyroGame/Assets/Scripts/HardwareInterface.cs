@@ -11,8 +11,7 @@ using UnityEngine;
 //responsible for handling and maintaining connection to the Cube and interface functions
 public class HardwareInterface : MonoBehaviour
 {
-    //there must only be one
-    public static HardwareInterface active;
+    public static HardwareInterface Instance { get; private set; }
 
     [Header("Preferences")]
     public int baudRate = 38400;
@@ -43,15 +42,15 @@ public class HardwareInterface : MonoBehaviour
     Queue<string> inMessages = new Queue<string>();
     Queue<string> outMessages = new Queue<string>();
 
-    public event CubeStatusChangeHandler CubeConnectedEvent;
-    public event CubeStatusChangeHandler CubeDisconnectedEvent;
+    private event CubeStatusChangeHandler CubeConnectedEvent;
+    private event CubeStatusChangeHandler CubeDisconnectedEvent;
 
     public delegate void CubeStatusChangeHandler();
 
 
     private void Start()
     {
-        active = this;
+        Instance = this;
     }
 
     private void Update()
@@ -141,10 +140,7 @@ public class HardwareInterface : MonoBehaviour
                 }
             }
             Debug.Log("Cube disconnected");
-            if (CubeDisconnectedEvent != null)
-            {
-                CubeDisconnectedEvent();
-            }
+            CubeDisconnectedEvent?.Invoke();
 
             if (communicationHandlerThread != null) { communicationHandlerThread.Abort(); }
 
@@ -245,12 +241,12 @@ public class HardwareInterface : MonoBehaviour
         return brightness;
     }
 
-    public void OnCubeConnected(Action method)
+    public void AddCubeConnectedAction(Action method)
     {
         CubeConnectedEvent += new CubeStatusChangeHandler(method);
     }
 
-    public void OnCubeDisconnected(Action method)
+    public void AddCubeDisconnectedAction(Action method)
     {
         CubeDisconnectedEvent += new CubeStatusChangeHandler(method);
     }
@@ -307,10 +303,7 @@ public class HardwareInterface : MonoBehaviour
                         SetLedBrightness(defaultBrightness);
                         connected = true;
                         connectionAttempt = false;
-                        if (CubeConnectedEvent != null)
-                        {
-                            CubeConnectedEvent();
-                        }
+                        CubeConnectedEvent?.Invoke();
                         communicationHandlerThread = new Thread(T_SendReceive);
                         communicationHandlerThread.Start();
                         return;

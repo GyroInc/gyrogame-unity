@@ -8,19 +8,19 @@ public class DemoScene : MonoBehaviour
     void Start()
     {
         //HardwareInterface.active.Connect();
-        HardwareInterface.active.OnCubeConnected(OnCubeConnected);
+        HardwareInterface.Instance.AddCubeConnectedAction(OnCubeConnected);
     }
     
     void OnCubeConnected()
     {
-        HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
+        HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(HardwareInterface.active.IsConnected())
-            Physics.gravity = HardwareInterface.active.GetRotation() * -Vector3.up * 9.81f;
+        if(HardwareInterface.Instance.IsConnected())
+            Physics.gravity = HardwareInterface.Instance.GetRotation() * -Vector3.up * 9.81f;
 
         if(Mathf.Abs( Physics.gravity.x) > Mathf.Abs(Physics.gravity.y) && Mathf.Abs(Physics.gravity.x) > Mathf.Abs(Physics.gravity.z))
         {

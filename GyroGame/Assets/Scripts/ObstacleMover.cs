@@ -21,12 +21,12 @@ public class ObstacleMover : MonoBehaviour
     private void Start()
     {
         //HardwareInterface.active.Connect();
-        HardwareInterface.active.OnCubeConnected(OnCubeConnected);
+        HardwareInterface.Instance.AddCubeConnectedAction(OnCubeConnected);
     }
 
     void OnCubeConnected()
     {
-        HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
+        HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
     }
 
     void Update()
@@ -49,19 +49,19 @@ public class ObstacleMover : MonoBehaviour
                         
 
                     //color stuff
-                    HardwareInterface.active.FadeAllLeds(CubeColor.green, 1000);
+                    HardwareInterface.Instance.FadeAllLeds(CubeColor.green, 1000);
                     selectionActive = true;
                 }
                 else
                 {
-                    HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
+                    HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
                     selectionActive = false;
                     offsetSet = false;
                 }
             }
             else
             {
-                HardwareInterface.active.FadeAllLeds(CubeColor.orange, 1000);
+                HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
                 selectionActive = false;
                 offsetSet = false;
             }
@@ -69,10 +69,10 @@ public class ObstacleMover : MonoBehaviour
 
         if(selectionActive)
         {
-            if(HardwareInterface.active.IsConnected())
+            if(HardwareInterface.Instance.IsConnected())
             {
                 //snap angles
-                Quaternion inputAngle = HardwareInterface.active.GetRotation() * offset; //OffsetTestScript.active.correctedCube * offset;
+                Quaternion inputAngle = HardwareInterface.Instance.GetRotation() * offset; //OffsetTestScript.active.correctedCube * offset;
                 Quaternion outputAngle = inputAngle;
                 float x = Mathf.RoundToInt((inputAngle.eulerAngles.x / 360f) * 4f) * 90;
                 float y = Mathf.RoundToInt((inputAngle.eulerAngles.y / 360f) * 4f) * 90;
