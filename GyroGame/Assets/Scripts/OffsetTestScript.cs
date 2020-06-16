@@ -18,7 +18,7 @@ public class OffsetTestScript : MonoBehaviour
     private void Start()
     {
         active = this;
-        HardwareInterface.Instance.Connect();
+        //HardwareInterface.Instance.Connect();
     }
 
     void Update()
