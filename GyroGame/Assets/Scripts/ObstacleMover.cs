@@ -10,6 +10,7 @@ public class ObstacleMover : MonoBehaviour
     public float rotationInterpolation = 0.2f;
     public float angleSnap;
 
+    public Color unselectedCubeColor;
     public Color unselectedColor;
     public Color selectedColor;
 
@@ -26,7 +27,7 @@ public class ObstacleMover : MonoBehaviour
 
     void OnCubeConnected()
     {
-        HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
+        HardwareInterface.Instance.FadeAllLeds(CubeColor.black, 1000);
     }
 
     void Update()
@@ -49,19 +50,19 @@ public class ObstacleMover : MonoBehaviour
                         
 
                     //color stuff
-                    HardwareInterface.Instance.FadeAllLeds(CubeColor.green, 1000);
+                    HardwareInterface.Instance.FadeAllLeds(new CubeColor(selectedColor), 1000);
                     selectionActive = true;
                 }
                 else
                 {
-                    HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
+                    HardwareInterface.Instance.FadeAllLeds(new CubeColor(unselectedCubeColor), 1000);
                     selectionActive = false;
                     offsetSet = false;
                 }
             }
             else
             {
-                HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
+                HardwareInterface.Instance.FadeAllLeds(new CubeColor(unselectedCubeColor), 1000);
                 selectionActive = false;
                 offsetSet = false;
             }

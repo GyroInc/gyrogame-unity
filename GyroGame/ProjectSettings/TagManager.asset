@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rotatable
+  - Pickup
   layers:
   - Default
   - TransparentFX

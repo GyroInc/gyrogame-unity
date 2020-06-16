@@ -11,6 +11,12 @@ public class CubeColor
         this.g = g;
         this.b = b;
     }
+    public CubeColor(Color color)
+    {
+        this.r = (int) (color.r * 255.0f);
+        this.g = (int) (color.g * 255.0f);
+        this.b = (int) (color.b * 255.0f);
+    }
     /* ### Insert custom cube colors here for easy access in script### */
     public static CubeColor red = new CubeColor(255, 0, 0);
     public static CubeColor green = new CubeColor(0, 255, 0);

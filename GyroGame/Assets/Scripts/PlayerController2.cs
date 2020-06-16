@@ -41,8 +41,8 @@ public class PlayerController2 : MonoBehaviour
 
     void Update()
     {
-        //if (EscapeMenu.active.escapeActive)
-        //    return;
+        if (EscapeMenu.active.escapeActive)
+            return;
 
         //look around
         roty += Input.GetAxis("Mouse X");
@@ -140,11 +140,13 @@ public class PlayerController2 : MonoBehaviour
         Vector3 gravityPart = Vector3.Scale(new Vector3(Mathf.Abs(Physics.gravity.normalized.x), Mathf.Abs(Physics.gravity.normalized.y), Mathf.Abs(Physics.gravity.normalized.z)), rb.velocity);
         rb.velocity = input + gravityPart;
 
+        /* probably wont be used and causes too many problems
         //sweep test for collision detection
         if (rb.SweepTestAll(input, 1f).Length == 0 || gravityPart.magnitude == 0)
             rb.velocity = input + gravityPart;
         else
             rb.velocity = gravityPart;
+        */
 
         //jump        
         if (Input.GetKeyDown(KeyCode.Space))
