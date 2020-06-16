@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SelectionController : MonoBehaviour
 {
@@ -57,6 +58,26 @@ public class SelectionController : MonoBehaviour
         selectionCube1.position = quit.position + (Vector3.left * centerOffset);
         selectionCube2.position = quit.position + (Vector3.right * centerOffset);
         RandomizeCube();
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void BuildingInstructions()
+    {
+        Application.OpenURL("https://gyrogame.de/2019/10/03/building-the-controller/");
+    }
+
+    public void Readme()
+    {
+        Application.OpenURL("https://gyrogame.de/concept/");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     void RandomizeCube()
