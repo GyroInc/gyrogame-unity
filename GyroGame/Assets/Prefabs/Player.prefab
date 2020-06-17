@@ -82,8 +82,9 @@ MonoBehaviour:
   selectionRange: 100
   rotationInterpolation: 0.08
   angleSnap: 10
-  unselectedColor: {r: 0.2249911, g: 0.4222868, b: 0.6037736, a: 1}
-  selectedColor: {r: 0, g: 0.5754717, b: 0.00001262269, a: 0}
+  unselectedCubeColor: {r: 1, g: 0.58835566, b: 0, a: 0}
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!114 &514433700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +188,7 @@ GameObject:
   - component: {fileID: 916193989514722672}
   - component: {fileID: 916193989514722675}
   - component: {fileID: 916193989514722674}
+  - component: {fileID: 2251250320887842187}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -259,3 +261,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916193989514722677}
   m_Enabled: 1
+--- !u!114 &2251250320887842187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916193989514722677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdcd06815c47d30489f70df42db56a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frustumSettings:
+    baseSettings: {fileID: 0}
+    qualitySettings: {fileID: 0}

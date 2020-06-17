@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EscapeMenu : MonoBehaviour
@@ -8,12 +9,13 @@ public class EscapeMenu : MonoBehaviour
     public static EscapeMenu active;
     public GameObject escapePanel;
     public bool escapeActive = false;
-    public Button connectButton;
-    public Text buttonText;
+    public Button buttonConnect;
     public Toggle connectedIndicator;
+    private Text connectButtonText;
 
     private void Start()
     {
+        connectButtonText = buttonConnect.GetComponentInChildren<Text>();
         active = this;
     }
 
@@ -41,7 +43,7 @@ public class EscapeMenu : MonoBehaviour
         if (HardwareInterface.Instance.connected)
         {
             connectedIndicator.isOn = true;
-            buttonText.text = "Disconnect the Cube";
+            connectButtonText.text = "Disconnect the Cube";
             cb.disabledColor= Color.green;
         }
         else
@@ -57,17 +59,27 @@ public class EscapeMenu : MonoBehaviour
         if (HardwareInterface.Instance.isAttemptingConnection())
         {
             HardwareInterface.Instance.CancelConnectionAttempt();
-            buttonText.text = "Connect the Cube";
+            connectButtonText.text = "Connect the Cube";
         }
         else if (HardwareInterface.Instance.connected)
         {
             HardwareInterface.Instance.Disconnect();
-            buttonText.text = "Connect the Cube";
+            connectButtonText.text = "Connect the Cube";
         }
         else
         {
             HardwareInterface.Instance.Connect();
-            buttonText.text = "Connecting...";
+            connectButtonText.text = "Connecting...";
         }
+    }
+
+    public void ExitTitle()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
