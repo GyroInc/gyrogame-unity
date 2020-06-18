@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6730515022542362696}
   m_Layer: 5
   m_Name: Overlay
-  m_TagString: Untagged
+  m_TagString: Overlay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

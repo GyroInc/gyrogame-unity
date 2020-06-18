@@ -6,6 +6,7 @@ using UnityEngine;
 public class FunctionKeys : MonoBehaviour
 {
     public bool ScreenshotEnabled = true;
+    public bool OverlayToggleEnabled = true;
 
     // Start is called before the first frame update
     void Start()
@@ -18,14 +19,29 @@ public class FunctionKeys : MonoBehaviour
     {
         if (ScreenshotEnabled && Input.GetKeyDown(KeyCode.F11))
         {
-            string path;
+            TakeScreenshot();
+        }
+        if(OverlayToggleEnabled && Input.GetKeyDown(KeyCode.F3))
+        {
+            ToggleOverlay();
+        }
+    }
+
+    private void TakeScreenshot()
+    {
+        string path;
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-            path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\GyroGame\\";
-            System.IO.Directory.CreateDirectory(path);
+        path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\GyroGame\\";
+        System.IO.Directory.CreateDirectory(path);
 #else
             path = Application.persistentDataPath;
 #endif
-            ScreenCapture.CaptureScreenshot(path + "GyroGame_" + DateTime.Now.ToString("yyyy_MM_dd_HHmmss") + ".png");
-        }
+        ScreenCapture.CaptureScreenshot(path + "GyroGame_" + DateTime.Now.ToString("yyyy_MM_dd_HHmmss") + ".png");
+    }
+
+    private void ToggleOverlay()
+    {
+        Canvas overlayCanvas = GameObject.FindGameObjectWithTag("Overlay").GetComponent<Canvas>();
+        overlayCanvas.enabled = !overlayCanvas.enabled;
     }
 }
