@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 916193989226121828}
   - component: {fileID: 2053750091292155071}
   - component: {fileID: 514433700}
-  - component: {fileID: 1345848315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -30,12 +29,12 @@ Transform:
   m_GameObject: {fileID: 916193989226121834}
   m_LocalRotation: {x: 0, y: -0.59833866, z: 0, w: 0.8012433}
   m_LocalPosition: {x: -1.28, y: 2.37, z: -2.6694756}
-  m_LocalScale: {x: 0.3, y: 0.7, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 916193989514722672}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -73.50201, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &916193989226121832
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -161,22 +160,6 @@ MonoBehaviour:
   fallMult: 20
   lowJumpMult: 15
   jumpSpeedCutoff: 10
---- !u!114 &1345848315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916193989226121834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f17da12bc185ecb4cbea50e5f4af3516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  absoluteCube: {fileID: 0}
-  relativeCube: {fileID: 0}
-  correctedCube: {x: 0, y: 0, z: 0, w: 0}
-  cubeEulers: {x: 0, y: 0, z: 0}
 --- !u!1 &916193989514722677
 GameObject:
   m_ObjectHideFlags: 0
