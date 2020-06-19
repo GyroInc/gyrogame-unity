@@ -29,8 +29,8 @@ public class PlayerController2 : MonoBehaviour
     CursorLockMode lockMode;
     void Awake()
     {
-        lockMode = CursorLockMode.Locked;
-        Cursor.lockState = lockMode;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Start()
@@ -151,7 +151,7 @@ public class PlayerController2 : MonoBehaviour
         //jump        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(gravityPart.magnitude < 0.2f && gravityPart.magnitude > -0.2f)
+            if (gravityPart.magnitude < 0.2f && gravityPart.magnitude > -0.2f)
                 rb.AddForce(-Physics.gravity.normalized * jumpForce, ForceMode.Impulse);
         }
 

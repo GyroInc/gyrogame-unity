@@ -29,6 +29,7 @@ public class EscapeMenu : MonoBehaviour
                 Time.timeScale = 1;
                 escapePanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
             else
             {
@@ -36,6 +37,7 @@ public class EscapeMenu : MonoBehaviour
                 Time.timeScale = 0;
                 escapePanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 
@@ -75,7 +77,8 @@ public class EscapeMenu : MonoBehaviour
 
     public void ExitTitle()
     {
-        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void ExitGame()

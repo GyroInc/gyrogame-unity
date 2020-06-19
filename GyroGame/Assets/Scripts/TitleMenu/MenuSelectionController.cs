@@ -27,6 +27,8 @@ public class MenuSelectionController : MonoBehaviour
     void Start()
     {
         SelectStart();
+        selectionCube1.position = selectionCubePos + (Vector3.left * selectionCubesCenterOffset);
+        selectionCube2.position = selectionCubePos + (Vector3.right * selectionCubesCenterOffset);
     }
 
     public void SelectStart()
@@ -57,7 +59,7 @@ public class MenuSelectionController : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void BuildingInstructions()

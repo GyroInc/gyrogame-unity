@@ -26,10 +26,10 @@ public class HardwareInterface : MonoBehaviour
     public bool debugConnectionAttempt, debugMessages;
 
     [Header("Status Information")]
-    /*[ReadOnly]*/ public bool connected;
-    /*[ReadOnly]*/ public bool batteryWarning;
-    /*[ReadOnly]*/ public float voltage;
-    /*[ReadOnly]*/ public Quaternion cubeRotation;
+    [ReadOnly] public bool connected;
+    [ReadOnly] public bool batteryWarning;
+    [ReadOnly] public float voltage;
+    [ReadOnly] public Quaternion cubeRotation;
 
     private int brightness;
     private bool connectionAttempt;
@@ -387,12 +387,12 @@ public class HardwareInterface : MonoBehaviour
     }
 }
 
-/*
 public class ReadOnlyAttribute : PropertyAttribute
 {
 
 }
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyDrawer : PropertyDrawer
 {
@@ -411,4 +411,4 @@ public class ReadOnlyDrawer : PropertyDrawer
         GUI.enabled = true;
     }
 }
-*/
+#endif

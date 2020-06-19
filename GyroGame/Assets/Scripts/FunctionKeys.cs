@@ -17,7 +17,7 @@ public class FunctionKeys : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScreenshotEnabled && Input.GetKeyDown(KeyCode.F11))
+        if (ScreenshotEnabled && Input.GetKeyDown(KeyCode.F2))
         {
             TakeScreenshot();
         }
