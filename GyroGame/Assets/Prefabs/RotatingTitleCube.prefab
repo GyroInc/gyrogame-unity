@@ -44,9 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def8dcc39d530834fa616521368db536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  random: 1
-  direction: {x: 0, y: 0, z: 0}
-  speed: 10
+  rotate: 1
+  randomRotation: 1
+  rotateDirection: {x: 0, y: 0, z: 0}
+  rotateSpeed: 10
+  hover: 0
+  hoverHeight: 0
+  hoverTime: 1
+  hoverCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hoverRandomStart: 0
 --- !u!1 &3173886160813820834
 GameObject:
   m_ObjectHideFlags: 0
