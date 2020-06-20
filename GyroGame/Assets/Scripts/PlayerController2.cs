@@ -25,8 +25,6 @@ public class PlayerController2 : MonoBehaviour
 
     Rigidbody rb;
 
-    // holds lock values to manage the Windows cursor
-    CursorLockMode lockMode;
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;

@@ -50,7 +50,17 @@ public class HardwareInterface : MonoBehaviour
 
     private void Start()
     {
+
+    }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -285,7 +295,7 @@ public class HardwareInterface : MonoBehaviour
                 port.WriteTimeout = 100;
                 try
                 {
-                    if(debugConnectionAttempt) Debug.Log("trying " + ports[i]);
+                    if (debugConnectionAttempt) Debug.Log("trying " + ports[i]);
                     port.Open();
                 }
                 catch

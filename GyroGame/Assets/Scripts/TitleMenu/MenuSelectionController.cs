@@ -79,7 +79,7 @@ public class MenuSelectionController : MonoBehaviour
 
     void RandomizeCube()
     {
-        selectionCube1.GetComponent<TitleMenuRotateCube>().Randomize();
-        selectionCube2.GetComponent<TitleMenuRotateCube>().Randomize();
+        selectionCube1.GetComponent<RotateAndHover>().RandomizeRotation();
+        selectionCube2.GetComponent<RotateAndHover>().RandomizeRotation();
     }
 }
