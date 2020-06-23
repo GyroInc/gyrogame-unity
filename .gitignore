@@ -110,6 +110,8 @@ $RECYCLE.BIN/
 
 */target
 
+# Ignore lightmaps
+Lightmap-*_*
 
 # non-free Unity Assets
 Aura\ 2*
