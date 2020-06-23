@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
-    public GameObject pickupDialogue;
+    public bool setCubeColor, fadeCubeColor;
+    public int fadeTime;
+    public Color cubeColor;
 
     void Start()
     {
@@ -18,24 +20,28 @@ public class PickupController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Player") return;
-        pickupDialogue.SetActive(true);
         
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.tag != "Player") return;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
-            HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
-            pickupDialogue.SetActive(false);
-            Destroy(this.gameObject);
+            if (setCubeColor)
+            {
+                HardwareInterface.Instance.SetAllLeds(new CubeColor(cubeColor));
+            } 
+            else if (fadeCubeColor)
+            {
+                HardwareInterface.Instance.FadeAllLeds(new CubeColor(cubeColor), fadeTime);
+            }
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag != "Player") return;
-        pickupDialogue.SetActive(false);
     }
 }
