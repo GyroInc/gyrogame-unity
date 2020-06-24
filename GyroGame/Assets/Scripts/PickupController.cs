@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickupController : MonoBehaviour
 {
     public bool setCubeColor, fadeCubeColor;
     public int fadeTime;
     public Color cubeColor;
+
+    public UnityEvent cubePickupEvent;
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class PickupController : MonoBehaviour
             {
                 HardwareInterface.Instance.FadeAllLeds(new CubeColor(cubeColor), fadeTime);
             }
+            cubePickupEvent.Invoke();
             Destroy(gameObject);
         }
     }

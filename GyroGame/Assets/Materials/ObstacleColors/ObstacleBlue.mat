@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Model11
+  m_Name: ObstacleBlue
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -61,9 +61,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.6
+    - _Glossiness: 0.8
     - _GlossyReflections: 1
-    - _Metallic: 0.15
+    - _Metallic: 0.2
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.44798666, b: 0.0990566, a: 1}
-    - _EmissionColor: {r: 1.3176471, g: 0.5882353, b: 0.1254902, a: 1}
+    - _Color: {r: 0.495283, g: 0.5790992, b: 1, a: 1}
+    - _EmissionColor: {r: 0.042452812, g: 0.20274702, b: 1, a: 1}

@@ -1,15 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class Obstaclecoupler : MonoBehaviour
+public class ObstacleCoupler : MonoBehaviour
 {
-    public Transform observe;
+    public RotatableObstacle parent;
     public Vector3 offset;
     
+    void Start()
+    {
+        parent.AddCoupledObstacle(this);
+    }
+
     void Update()
     {
-        transform.rotation = Quaternion.Euler(offset) * observe.rotation;
+        if (parent != null)
+        {
+            transform.rotation = Quaternion.Euler(offset) * parent.transform.rotation;
+        }
+    }
+
+    internal RotatableObstacle GetParentObstacle()
+    {
+        return parent;
     }
 }

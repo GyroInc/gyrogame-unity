@@ -50,7 +50,7 @@ public class HardwareInterface : MonoBehaviour
 
     private void Start()
     {
-
+        AddCubeConnectedAction(() => FadeAllLeds(CubeColor.black, 200));
     }
 
     void Awake()
@@ -59,8 +59,11 @@ public class HardwareInterface : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Update()
@@ -330,8 +333,15 @@ public class HardwareInterface : MonoBehaviour
         {
             if (port.BytesToRead > 0)
             {
-                string message = port.ReadLine();
-                inMessages.Enqueue(message);
+                try
+                {
+                    string message = port.ReadLine();
+                    inMessages.Enqueue(message);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Unable to read cube port!\n" + e.Message);
+                }
             }
             if (outMessages.Count > 0)
             {
