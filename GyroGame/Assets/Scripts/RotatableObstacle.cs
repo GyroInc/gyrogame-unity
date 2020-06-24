@@ -9,12 +9,11 @@ public class RotatableObstacle : MonoBehaviour
     private float rotationInterpolation = 8f;
     private float angleSnap = 10;
 
-    private List<ObstacleCoupler> coupledObstacles;
+    private List<ObstacleCoupler> coupledObstacles = new List<ObstacleCoupler>();
 
     // Start is called before the first frame update
     void Start()
     {
-        coupledObstacles = new List<ObstacleCoupler>();
     }
 
     // Update is called once per frame

@@ -27379,8 +27379,8 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MinParticleSize: 0.002
+  m_MaxParticleSize: 0.003
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -54103,7 +54103,7 @@ PrefabInstance:
     - target: {fileID: 6044057040135069956, guid: 9d7bbe867cdbf5f43ba4cf8b27d58231,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 87
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 6044057040135069956, guid: 9d7bbe867cdbf5f43ba4cf8b27d58231,
         type: 3}
@@ -54125,10 +54125,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Welcome to GyroGame,
 
-        please connect the cube
+        please connect the GyroCube
 
-        in the
-        escape menu before
+        using
+        the pause menu before
 
         starting to play'
       objectReference: {fileID: 0}
@@ -54741,7 +54741,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15964
+  m_Name: pb_Mesh94164
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
