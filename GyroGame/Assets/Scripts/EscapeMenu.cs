@@ -11,6 +11,8 @@ public class EscapeMenu : MonoBehaviour
     public bool escapeActive = false;
     public Button buttonConnect;
     public Toggle connectedIndicator;
+    public Slider lookSpeedSlider;
+
     private Text connectButtonText;
 
     private void Start()
@@ -54,7 +56,14 @@ public class EscapeMenu : MonoBehaviour
             cb.disabledColor = Color.red;
         }
         connectedIndicator.colors = cb;
+
+        lookSpeedSlider.value = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().GetLooksSpeed();
     }
+
+    public void SetLookSpeed(float speed)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().SetLookSpeed(speed);
+    } 
 
     public void toggleCubeConnection()
     {

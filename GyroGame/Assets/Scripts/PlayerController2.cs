@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
-    public AnimationCurve AxisPressResponse;
-    public AnimationCurve AxisReleaseResponse;
+    //public AnimationCurve AxisPressResponse;
+    //public AnimationCurve AxisReleaseResponse;
     public Transform pCamera;
-
 
     public float movSpeedMult = 1;
     public float lookSpeed = 3;
@@ -18,9 +15,8 @@ public class PlayerController2 : MonoBehaviour
     public float lowJumpMult = 1.5f;
     public float jumpSpeedCutoff = 0.3f;
 
-    Vector2 rotation = new Vector2(0, 0);
     float roty, rotx;
-    float tw, ts, ta, td;
+    float tw = 0, ts = 0, ta = 0, td = 0;
     bool pw = false, ps = false, pa = false, pd = false;
 
     Rigidbody rb;
@@ -33,8 +29,15 @@ public class PlayerController2 : MonoBehaviour
 
     private void Start()
     {
-        Time.fixedDeltaTime = 1f / 200f;
+        //Time.fixedDeltaTime = 1f / 200f;
         rb = GetComponent<Rigidbody>();
+
+        //Apply initial rotation
+        rotx = 360 - pCamera.localEulerAngles.x;
+        roty = transform.localEulerAngles.y;
+
+        //Apply saved LookSpeed
+        lookSpeed = PlayerPrefs.GetFloat("LookSpeed", lookSpeed);
     }
 
     void Update()
@@ -43,16 +46,19 @@ public class PlayerController2 : MonoBehaviour
             return;
 
         //look around
-        roty += Input.GetAxis("Mouse X");
-        rotx += Input.GetAxis("Mouse Y");
-        rotx = Mathf.Clamp(rotx, -30, 30);
-        pCamera.localEulerAngles = new Vector2(-rotx, 0) * lookSpeed;
-        //deprecated, needs to be gravity fixed
-        //transform.localEulerAngles = new Vector3(0, roty) * lookSpeed;
-        //fixed :)
-        SetAbsRotOnYGravityFixed(roty * lookSpeed);
+        roty += Input.GetAxis("Mouse X") * lookSpeed;
+        rotx += Input.GetAxis("Mouse Y") * lookSpeed;
+        rotx = Mathf.Clamp(rotx, -90, 90);
+        //Camera x rotation
+        pCamera.localEulerAngles = new Vector2(-rotx, 0) ;
+        //Player y rotation
+        SetAbsRotOnYGravityFixed(roty);
 
         //Input evaluation
+        float velV = Input.GetAxis("Vertical") * movSpeedMult;
+        float velH = Input.GetAxis("Horizontal") * movSpeedMult;
+
+        /*
         #region Button input stuff
         if (Input.GetKeyDown(KeyCode.W))
             tw = 0;
@@ -110,7 +116,7 @@ public class PlayerController2 : MonoBehaviour
 
         float velH;
         float velV;
-        float valw, vals, vala, vald;
+        float valw = 0, vals = 0, vala = 0, vald = 0;
 
         if (pw)
             valw = AxisPressResponse.Evaluate(tw);
@@ -129,12 +135,13 @@ public class PlayerController2 : MonoBehaviour
         else
             vala = AxisReleaseResponse.Evaluate(ta);
 
-        velV = Mathf.Abs(valw) > Mathf.Abs(vals) ? valw : -vals;
-        velH = Mathf.Abs(vald) > Mathf.Abs(vala) ? vald : -vala;
+        velV = (Mathf.Abs(valw) > Mathf.Abs(vals) ? valw : -vals) * movSpeedMult;
+        velH = (Mathf.Abs(vald) > Mathf.Abs(vala) ? vald : -vala) * movSpeedMult;
+         */
         //inputs complete
 
         //always be relative to own body
-        Vector3 input = (transform.rotation * Vector3.forward * velV * movSpeedMult) + (transform.rotation * Vector3.right * velH * movSpeedMult);
+        Vector3 input = (transform.rotation * Vector3.forward * velV) + (transform.rotation * Vector3.right * velH);
         Vector3 gravityPart = Vector3.Scale(new Vector3(Mathf.Abs(Physics.gravity.normalized.x), Mathf.Abs(Physics.gravity.normalized.y), Mathf.Abs(Physics.gravity.normalized.z)), rb.velocity);
         rb.velocity = input + gravityPart;
 
@@ -162,11 +169,22 @@ public class PlayerController2 : MonoBehaviour
             rb.velocity += gravityVector * (lowJumpMult - 1f) * Time.deltaTime;
 
         //debug
-        Debug.DrawRay(transform.position, (transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized * 0.3f);
+        //Debug.DrawRay(transform.position, (transform.forward * velV * movSpeedMult + transform.up * 0 + transform.right * velH * movSpeedMult).normalized * 0.3f);
     }
 
     void SetAbsRotOnYGravityFixed(float degrees)
     {
         transform.localRotation = Quaternion.FromToRotation(Vector3.up, -Physics.gravity) * Quaternion.Euler(0, degrees, 0);
+    }
+
+    public void SetLookSpeed(float speed)
+    {
+        lookSpeed = speed;
+        PlayerPrefs.SetFloat("LookSpeed", lookSpeed);
+    }
+
+    public float GetLooksSpeed()
+    {
+        return lookSpeed;
     }
 }
