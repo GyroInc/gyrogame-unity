@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  cubeColor: {r: 0.2907269, g: 1, b: 0, a: 1}
+  cubeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &48466488 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2053750091292155071, guid: 7068a61e270292d4ba0c424971cf8df3,
@@ -33871,7 +33871,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh84652
+  m_Name: pb_Mesh16800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -71542,7 +71542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  cubeColor: {r: 1, g: 0.025920192, b: 0, a: 1}
+  cubeColor: {r: 0.2907269, g: 1, b: 0, a: 1}
 --- !u!1 &2140190225
 GameObject:
   m_ObjectHideFlags: 0
