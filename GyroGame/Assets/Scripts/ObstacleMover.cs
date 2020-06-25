@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObstacleMover : MonoBehaviour
 {
@@ -22,30 +19,23 @@ public class ObstacleMover : MonoBehaviour
     {
         if (EscapeMenu.active.escapeActive || !playerCanRotateObstacles) return;
         //select on click
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             DeselectObstacle();
 
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            if (Physics.Raycast(ray, out hit, selectionRange, LayerMask.GetMask("Rotatable")))
             {
-                //requires right tag
-                if (hit.transform.tag == "Rotatable")
+                selected = hit.transform.parent.gameObject.GetComponent<RotatableObstacle>();
+                if (selected == null)
                 {
-                    selected = hit.transform.parent.gameObject.GetComponent<RotatableObstacle>();
-                    if(selected == null)
-                    {
-                        selected = hit.transform.parent.gameObject.GetComponent<ObstacleCoupler>().GetParentObstacle();
-                    }
-                    selected.SetActiveObstacle(true);
+                    selected = hit.transform.parent.gameObject.GetComponent<ObstacleCoupler>().GetParentObstacle();
+                }
+                selected.SetActiveObstacle(true);
 
-                    //color stuff
-                    HardwareInterface.Instance.FadeAllLeds(new CubeColor(selected.cubeColor), cubeColorFadeTime);
-                }
-                else
-                {
-                    HardwareInterface.Instance.FadeAllLeds(new CubeColor(standbyCubeColor), cubeColorFadeTime);
-                }
+                //color stuff
+                HardwareInterface.Instance.FadeAllLeds(new CubeColor(selected.cubeColor), cubeColorFadeTime);
             }
             else
             {

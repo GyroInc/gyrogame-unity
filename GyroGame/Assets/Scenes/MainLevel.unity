@@ -128,7 +128,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16140
+  m_Name: pb_Mesh83762
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -291,7 +291,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15730
+  m_Name: pb_Mesh83184
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -464,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46761752}
   - component: {fileID: 46761753}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,6 +1262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &136248323 stripped
@@ -1283,7 +1288,7 @@ GameObject:
   - component: {fileID: 144672325}
   - component: {fileID: 144672324}
   - component: {fileID: 144672323}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -1586,7 +1591,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15836
+  m_Name: pb_Mesh83338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1762,7 +1767,7 @@ GameObject:
   - component: {fileID: 192270511}
   - component: {fileID: 192270510}
   - component: {fileID: 192270509}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -4244,6 +4249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &232571014 stripped
@@ -4344,6 +4354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &240027819 stripped
@@ -4434,6 +4449,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &248419473 stripped
@@ -4452,7 +4472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 281127179}
   - component: {fileID: 281127180}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4498,7 +4518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 296941181}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4960,6 +4980,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &335182237 stripped
@@ -5375,6 +5400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &381332302 stripped
@@ -5396,7 +5426,7 @@ GameObject:
   - component: {fileID: 383539589}
   - component: {fileID: 383539588}
   - component: {fileID: 383539587}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -5942,7 +5972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 398330628}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10096,7 +10126,7 @@ GameObject:
   - component: {fileID: 425283407}
   - component: {fileID: 425283406}
   - component: {fileID: 425283405}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -10709,7 +10739,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16268
+  m_Name: pb_Mesh83926
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10872,7 +10902,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16104
+  m_Name: pb_Mesh83722
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11042,7 +11072,7 @@ GameObject:
   - component: {fileID: 454887223}
   - component: {fileID: 454887222}
   - component: {fileID: 454887221}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -13137,7 +13167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 472000093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13949,7 +13979,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15808
+  m_Name: pb_Mesh83302
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14212,7 +14242,7 @@ GameObject:
   - component: {fileID: 547089779}
   - component: {fileID: 547089778}
   - component: {fileID: 547089777}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -14831,6 +14861,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &549636374 stripped
@@ -14848,7 +14883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551271325}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15195,7 +15230,7 @@ GameObject:
   - component: {fileID: 587412497}
   - component: {fileID: 587412496}
   - component: {fileID: 587412495}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -16784,7 +16819,7 @@ GameObject:
   - component: {fileID: 686597626}
   - component: {fileID: 686597625}
   - component: {fileID: 686597624}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -18783,6 +18818,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &687419440 stripped
@@ -18895,7 +18935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699912068}
   - component: {fileID: 699912069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19324,6 +19364,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &715830124 stripped
@@ -19338,7 +19383,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16636
+  m_Name: pb_Mesh84400
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19595,7 +19640,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16714
+  m_Name: pb_Mesh84520
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19854,7 +19899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751807276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19943,7 +19988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788503526}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19975,7 +20020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 794691452}
   - component: {fileID: 794691453}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle52
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20304,6 +20349,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &798361623 stripped
@@ -20325,7 +20375,7 @@ GameObject:
   - component: {fileID: 802320992}
   - component: {fileID: 802320991}
   - component: {fileID: 802320990}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -21233,7 +21283,7 @@ GameObject:
   - component: {fileID: 853874059}
   - component: {fileID: 853874058}
   - component: {fileID: 853874057}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -21783,7 +21833,7 @@ GameObject:
   - component: {fileID: 862143944}
   - component: {fileID: 862143943}
   - component: {fileID: 862143942}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -22733,7 +22783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 882716175}
   - component: {fileID: 882716176}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27203,7 +27253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 908225270}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32081,7 +32131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 935824933}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32113,7 +32163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949237874}
   - component: {fileID: 949237873}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32160,7 +32210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953155074}
   - component: {fileID: 953155075}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32279,6 +32329,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &964464376 stripped
@@ -32369,6 +32424,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &974101208 stripped
@@ -32458,6 +32518,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Aura Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
@@ -32783,7 +32848,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16656
+  m_Name: pb_Mesh84422
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32953,7 +33018,7 @@ GameObject:
   - component: {fileID: 1012781431}
   - component: {fileID: 1012781430}
   - component: {fileID: 1012781429}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -33806,7 +33871,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16796
+  m_Name: pb_Mesh84652
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33973,7 +34038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1033869636}
   - component: {fileID: 1033869637}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle55
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34146,7 +34211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1050610791}
   - component: {fileID: 1050610790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34196,7 +34261,7 @@ GameObject:
   - component: {fileID: 1054119695}
   - component: {fileID: 1054119694}
   - component: {fileID: 1054119693}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -36122,7 +36187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073520815}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36747,7 +36812,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16526
+  m_Name: pb_Mesh84252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37006,7 +37071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142197415}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37037,7 +37102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149047470}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37613,6 +37678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ObstacleLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
@@ -44723,6 +44793,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1263629764 stripped
@@ -44817,7 +44892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1317356519}
   - component: {fileID: 1317356520}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle46
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45558,7 +45633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1377428374}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45910,7 +45985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1388266402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46257,7 +46332,7 @@ GameObject:
   - component: {fileID: 1388755344}
   - component: {fileID: 1388755343}
   - component: {fileID: 1388755342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -46801,6 +46876,86 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[0].value
+      value: 0.003540039
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].time
+      value: 0.09671852
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].value
+      value: 0.50184697
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].inSlope
+      value: 1.44765
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].outSlope
+      value: 1.44765
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[1].outWeight
+      value: 0.06981019
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisPressResponse.m_Curve.Array.data[2].value
+      value: 1.00354
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[0].time
+      value: 0.0025367737
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[1].time
+      value: 0.49652284
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[1].value
+      value: 0.0000006556511
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[1].inSlope
+      value: -0.026487725
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[1].outSlope
+      value: -0.026487725
+      objectReference: {fileID: 0}
+    - target: {fileID: 514433700, guid: 7068a61e270292d4ba0c424971cf8df3, type: 3}
+      propertyPath: AxisReleaseResponse.m_Curve.Array.data[1].inWeight
+      value: 0.069475114
+      objectReference: {fileID: 0}
     - target: {fileID: 916193989226121831, guid: 7068a61e270292d4ba0c424971cf8df3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -46898,7 +47053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1432306245}
   - component: {fileID: 1432306246}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47017,6 +47172,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1442193605 stripped
@@ -47035,7 +47195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444055584}
   - component: {fileID: 1444055585}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle44
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47078,7 +47238,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15922
+  m_Name: pb_Mesh83446
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -47327,6 +47487,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1474621580 stripped
@@ -47508,7 +47673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1518071168}
   - component: {fileID: 1518071169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51669,7 +51834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533432293}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51859,7 +52024,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1561920848}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51973,6 +52138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1577740756 stripped
@@ -51990,7 +52160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586099947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52024,7 +52194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1586675445}
   - component: {fileID: 1586675446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52070,7 +52240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596178791}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52198,7 +52368,7 @@ GameObject:
   - component: {fileID: 1604662936}
   - component: {fileID: 1604662935}
   - component: {fileID: 1604662934}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54301,7 +54471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612290454}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54335,7 +54505,7 @@ GameObject:
   - component: {fileID: 1640499061}
   - component: {fileID: 1640499060}
   - component: {fileID: 1640499059}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -54878,7 +55048,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16004
+  m_Name: pb_Mesh83586
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -55045,7 +55215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650966495}
   - component: {fileID: 1650966496}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55348,7 +55518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686547085}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55611,7 +55781,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16314
+  m_Name: pb_Mesh83972
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -56013,6 +56183,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1743458642 stripped
@@ -56360,7 +56535,7 @@ GameObject:
   - component: {fileID: 1768387292}
   - component: {fileID: 1768387291}
   - component: {fileID: 1768387290}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stairs
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -63849,6 +64024,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1823120785 stripped
@@ -68216,6 +68396,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aura Point Light
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &1851168349 stripped
@@ -68602,7 +68787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1901490768}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68797,7 +68982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922502404}
   - component: {fileID: 1922502405}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68925,6 +69110,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ObstacleLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
@@ -69106,7 +69296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1954116813}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69140,7 +69330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1965674361}
   - component: {fileID: 1965674362}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle56
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69190,7 +69380,7 @@ GameObject:
   - component: {fileID: 1965989951}
   - component: {fileID: 1965989950}
   - component: {fileID: 1965989949}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Rotatable
   m_Icon: {fileID: 0}
@@ -70136,7 +70326,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15864
+  m_Name: pb_Mesh83372
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -70302,7 +70492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1975666552}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70330,7 +70520,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16128
+  m_Name: pb_Mesh83750
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -70742,6 +70932,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObstacleLight
       objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
 --- !u!4 &2066719618 stripped
@@ -70759,7 +70954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089903598}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70787,7 +70982,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15714
+  m_Name: pb_Mesh83156
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -70953,7 +71148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2100158910}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70981,7 +71176,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh15954
+  m_Name: pb_Mesh83498
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -71311,7 +71506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2134418000}
   - component: {fileID: 2134418001}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle51
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72012,6 +72207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Aura Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942608574521659511, guid: 24153074be935e444855f0c78939ce90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24153074be935e444855f0c78939ce90, type: 3}
