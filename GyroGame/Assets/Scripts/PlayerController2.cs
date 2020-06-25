@@ -16,8 +16,8 @@ public class PlayerController2 : MonoBehaviour
     public float jumpSpeedCutoff = 0.3f;
 
     float roty, rotx;
-    float tw = 0, ts = 0, ta = 0, td = 0;
-    bool pw = false, ps = false, pa = false, pd = false;
+    //float tw = 0, ts = 0, ta = 0, td = 0;
+    //bool pw = false, ps = false, pa = false, pd = false;
 
     Rigidbody rb;
 
@@ -29,7 +29,7 @@ public class PlayerController2 : MonoBehaviour
 
     private void Start()
     {
-        //Time.fixedDeltaTime = 1f / 200f;
+        Time.fixedDeltaTime = 1f / 200f;
         rb = GetComponent<Rigidbody>();
 
         //Apply initial rotation

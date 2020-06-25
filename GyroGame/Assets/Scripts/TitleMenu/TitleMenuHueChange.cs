@@ -21,6 +21,10 @@ public class TitleMenuHueChange : MonoBehaviour
     {
         ColorLight.color = ShiftHue(ColorLight.color);
 
+        //foreach (Image image in MenuCanvas.GetComponentsInChildren<Image>())
+        //{
+        //    image.color = ShiftHue(image.color);
+        //}
         foreach (TextMeshProUGUI tmp in MenuCanvas.GetComponentsInChildren<TextMeshProUGUI>())
         {
             tmp.color = ShiftHue(tmp.color);
@@ -37,6 +41,7 @@ public class TitleMenuHueChange : MonoBehaviour
         {
             mr.material.color = ShiftHue(mr.material.color);
         }
+
     }
 
     private Color ShiftHue(Color color)

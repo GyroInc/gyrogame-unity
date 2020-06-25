@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,11 +24,7 @@ public class ObstacleMover : MonoBehaviour
         //select on click
         if(Input.GetMouseButtonDown(0))
         {
-            //Deactivate old object
-            if (selected != null)
-            {
-                selected.SetActiveObstacle(false);
-            }
+            DeselectObstacle();
 
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
@@ -54,6 +51,20 @@ public class ObstacleMover : MonoBehaviour
             {
                 HardwareInterface.Instance.FadeAllLeds(new CubeColor(standbyCubeColor), cubeColorFadeTime);
             }
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            DeselectObstacle();
+            HardwareInterface.Instance.FadeAllLeds(new CubeColor(standbyCubeColor), cubeColorFadeTime);
+        }
+    }
+
+    private void DeselectObstacle()
+    {
+        //Deactivate old object
+        if (selected != null)
+        {
+            selected.SetActiveObstacle(false);
         }
     }
 

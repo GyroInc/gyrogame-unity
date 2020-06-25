@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FunctionKeys : MonoBehaviour
@@ -8,10 +6,24 @@ public class FunctionKeys : MonoBehaviour
     public bool ScreenshotEnabled = true;
     public bool OverlayToggleEnabled = true;
 
+    public static FunctionKeys Instance { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -24,6 +36,10 @@ public class FunctionKeys : MonoBehaviour
         if(OverlayToggleEnabled && Input.GetKeyDown(KeyCode.F3))
         {
             ToggleOverlay();
+        }
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            ToggleFullscreen();
         }
     }
 
@@ -43,5 +59,18 @@ public class FunctionKeys : MonoBehaviour
     {
         Canvas overlayCanvas = GameObject.FindGameObjectWithTag("Overlay").GetComponent<Canvas>();
         overlayCanvas.enabled = !overlayCanvas.enabled;
+    }
+
+    private void ToggleFullscreen()
+    {
+        if (Screen.fullScreen)
+        {
+            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.MaximizedWindow);
+            Screen.fullScreen = false;
+        } else
+        {
+            Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.FullScreenWindow);
+            Screen.fullScreen = true;
+        }
     }
 }
