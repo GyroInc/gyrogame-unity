@@ -11,21 +11,6 @@ public class PickupController : MonoBehaviour
 
     public UnityEvent cubePickupEvent;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.tag != "Player") return;
@@ -43,9 +28,5 @@ public class PickupController : MonoBehaviour
             cubePickupEvent.Invoke();
             Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
     }
 }
