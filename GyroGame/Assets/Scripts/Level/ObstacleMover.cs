@@ -9,12 +9,6 @@ public class ObstacleMover : MonoBehaviour
 
     private RotatableObstacle selected;
 
-
-    private void Start()
-    {
-
-    }
-
     void Update()
     {
         if (EscapeMenu.Instance.escapeActive || !playerCanRotateObstacles) return;

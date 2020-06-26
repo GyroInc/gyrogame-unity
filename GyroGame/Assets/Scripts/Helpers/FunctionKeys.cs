@@ -8,11 +8,6 @@ public class FunctionKeys : MonoBehaviour
 
     public static FunctionKeys Instance { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,7 +21,6 @@ public class FunctionKeys : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (ScreenshotEnabled && Input.GetKeyDown(KeyCode.F2))

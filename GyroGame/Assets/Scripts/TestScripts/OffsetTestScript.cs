@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class OffsetTestScript : MonoBehaviour
 {
-    public static OffsetTestScript active;
     public Transform absoluteCube;
     public Transform relativeCube;
 
     public Quaternion correctedCube = Quaternion.identity;
     public Vector3 cubeEulers;
-    Quaternion playerPerspectiveCorrection = Quaternion.identity;
+    readonly Quaternion playerPerspectiveCorrection = Quaternion.identity;
 
-    int calibrationStep = 0;
-    float yawOffset = 0;
+    int calibrationStep;
+    float yawOffset;
 
     private void Start()
     {
-        active = this;
-        //HardwareInterface.Instance.Connect();
+        HardwareInterface.Instance.Connect();
     }
 
     void Update()
@@ -47,6 +45,8 @@ public class OffsetTestScript : MonoBehaviour
                         yawOffset = -HardwareInterface.Instance.GetRotation().eulerAngles.y;
                         HardwareInterface.Instance.SetLed(5, CubeColor.black);
                         HardwareInterface.Instance.SetLed(1, CubeColor.black);
+                        break;
+                    default:
                         break;
                 }                
             }

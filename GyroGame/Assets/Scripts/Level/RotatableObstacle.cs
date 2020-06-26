@@ -3,33 +3,21 @@ using UnityEngine;
 
 public class RotatableObstacle : MonoBehaviour
 {
-    [ReadOnly] public bool active = false;
+    [ReadOnly] public bool active;
     public Color cubeColor;
 
-    private float rotationInterpolation = 8f;
-    private float angleSnap = 10;
+    private readonly float rotationInterpolation = 8f;
+    private readonly float angleSnap = 10;
 
-    private List<ObstacleCoupler> coupledObstacles = new List<ObstacleCoupler>();
+    private readonly List<ObstacleCoupler> coupledObstacles = new List<ObstacleCoupler>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (active)
         {
             if (HardwareInterface.Instance.IsConnected())
             {
-                //if(!offsetSet)
-                //{
-                //    offset = selected.transform.rotation * Quaternion.Euler(Vector3.right);
-                //    offsetSet = true;
-                //}
-
-                Quaternion inputAngle = HardwareInterface.Instance.GetRotation(); // * offset
+                Quaternion inputAngle = HardwareInterface.Instance.GetRotation();
                 Quaternion outputAngle = inputAngle;
                 //snap angles
                 float x = Mathf.RoundToInt((inputAngle.eulerAngles.x / 360f) * 4f) * 90;

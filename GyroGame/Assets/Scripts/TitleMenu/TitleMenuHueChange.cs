@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,21 +9,11 @@ public class TitleMenuHueChange : MonoBehaviour
     public GameObject SelectionCubes;
 
     public float speed = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         ColorLight.color = ShiftHue(ColorLight.color);
 
-        //foreach (Image image in MenuCanvas.GetComponentsInChildren<Image>())
-        //{
-        //    image.color = ShiftHue(image.color);
-        //}
         foreach (TextMeshProUGUI tmp in MenuCanvas.GetComponentsInChildren<TextMeshProUGUI>())
         {
             tmp.color = ShiftHue(tmp.color);
@@ -41,7 +30,6 @@ public class TitleMenuHueChange : MonoBehaviour
         {
             mr.material.color = ShiftHue(mr.material.color);
         }
-
     }
 
     private Color ShiftHue(Color color)

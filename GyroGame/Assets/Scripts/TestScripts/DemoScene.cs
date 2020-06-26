@@ -7,7 +7,6 @@ public class DemoScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //HardwareInterface.active.Connect();
         HardwareInterface.Instance.AddCubeConnectedAction(OnCubeConnected);
     }
     

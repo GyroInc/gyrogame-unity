@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class EscapeMenu : MonoBehaviour
 {
-    public static EscapeMenu Instance;
+    public static EscapeMenu Instance { get; private set; }
     public GameObject escapePanel;
-    public bool escapeActive = false;
+    public bool escapeActive;
     public Button buttonConnect;
     public Toggle connectedIndicator;
     public Slider lookSpeedSlider;

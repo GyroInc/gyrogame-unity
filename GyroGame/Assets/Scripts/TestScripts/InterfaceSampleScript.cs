@@ -65,25 +65,13 @@ public class InterfaceSampleScript : MonoBehaviour
         {
             HardwareInterface.Instance.FadeAllLeds(CubeColor.orange, 1000);
         }
-
-
         /* ### Example of the calculation of an offset for calibration, fully functional ### */
         if (Input.GetKeyDown(KeyCode.N))
         {
             qOffset = Quaternion.Inverse(HardwareInterface.Instance.GetRotation());
 
             /* ### Send a singe 'c' to reinitialize gyro in cube firmware ### */
-            //port.WriteLine("c");
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            //port.WriteLine("b64");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            //port.WriteLine("b220");
+            HardwareInterface.Instance.SendCommand("c");
         }
 
         /* ### Fade to individual colors ### */

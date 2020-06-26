@@ -17,7 +17,8 @@ public class HardwareInterface : MonoBehaviour
     public int baudRate = 38400;
     public int defaultBrightness = 128;
     public float lowBatteryVoltage = 3;
-    private float connectionTimeout = 6.5f;
+
+    private readonly float connectionTimeout = 6.5f;
 
 
     [Header("Debug Settings")]
@@ -39,18 +40,13 @@ public class HardwareInterface : MonoBehaviour
     private Thread communicationHandlerThread;
 
     private SerialPort port;
-    Queue<string> inMessages = new Queue<string>();
-    Queue<string> outMessages = new Queue<string>();
+    private readonly Queue<string> inMessages = new Queue<string>();
+    private readonly Queue<string> outMessages = new Queue<string>();
 
     private event CubeStatusChangeHandler CubeConnectedEvent;
     private event CubeStatusChangeHandler CubeDisconnectedEvent;
 
     public delegate void CubeStatusChangeHandler();
-
-
-    private void Start()
-    {
-    }
 
     void Awake()
     {

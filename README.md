@@ -16,7 +16,7 @@ To play this game you need a custom bluetooth controller.
 
 You can find the firmware repository for it here:
 
-https://github.com/GyroInc/gyrogame-hardware
+<https://github.com/GyroInc/gyrogame-hardware>
 
 <br>
 
