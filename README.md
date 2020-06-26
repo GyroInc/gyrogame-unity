@@ -1,7 +1,6 @@
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f86b783ab3654214a645aaf30f1354c0)](https://app.codacy.com/gh/GyroInc/gyrogame-unity?utm_source=github.com&utm_medium=referral&utm_content=GyroInc/gyrogame-unity&utm_campaign=Badge_Grade_Dashboard)
 
-![](https://raw.githubusercontent.com/Manut38/gyrogame-unity/master/Documentation/Logo/GyroGame_textlogo.png)
+![GyroGame Logo](https://raw.githubusercontent.com/Manut38/gyrogame-unity/master/Documentation/Logo/GyroGame_textlogo.png)
 
 <br>
 
@@ -9,17 +8,20 @@
 
 GyroGame is a game about loosing every touch with reality. (Well, not really... But it might be disorienting)
 
-<br>
-
-Here you can find our controller firmware repository:
-
-https://github.com/Manut38/gyrogame-hardware
+The alpha version currently only includes one level, but there are many ideas for new content...
 
 <br>
-<br>
-<br>
+
+To play this game you need a custom bluetooth controller.
+
+You can find the firmware repository for it here:
+
+https://github.com/GyroInc/gyrogame-hardware
+
 <br>
 
-The gyro game is a very innovative API game that introduces Blockchain technology with the latest Genetic and Machine Learning Algorithms. This allows GyroSystems Inc. to lead the way in the newest Technologys on the market. With outstanding Design and focus on even the smallest details we ensure the top most quality to our customers.
+This game was developed within two semesters of our Software Engineering class at the DHBW Karlsruhe.
 
-Invest now pleas.
+If you want to know more about the development of this game you should know that we posted weekly blog entries during the two semesters.
+
+You can find our Blog here: [GyroGame Blog](https://gyrogame.de)
