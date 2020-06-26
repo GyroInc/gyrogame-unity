@@ -17,7 +17,7 @@ public class ObstacleMover : MonoBehaviour
 
     void Update()
     {
-        if (EscapeMenu.active.escapeActive || !playerCanRotateObstacles) return;
+        if (EscapeMenu.Instance.escapeActive || !playerCanRotateObstacles) return;
         //select on click
         if (Input.GetMouseButtonDown(0))
         {

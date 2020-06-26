@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EscapeMenu : MonoBehaviour
 {
-    public static EscapeMenu active;
+    public static EscapeMenu Instance;
     public GameObject escapePanel;
     public bool escapeActive = false;
     public Button buttonConnect;
@@ -18,7 +16,18 @@ public class EscapeMenu : MonoBehaviour
     private void Start()
     {
         connectButtonText = buttonConnect.GetComponentInChildren<Text>();
-        active = this;
+    }
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Update()

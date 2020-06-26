@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (EscapeMenu.active.escapeActive)
+        if (EscapeMenu.Instance.escapeActive)
             return;
 
         //look around

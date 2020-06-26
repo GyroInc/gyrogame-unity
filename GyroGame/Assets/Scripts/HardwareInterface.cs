@@ -50,7 +50,6 @@ public class HardwareInterface : MonoBehaviour
 
     private void Start()
     {
-        AddCubeConnectedAction(() => FadeAllLeds(CubeColor.black, 200));
     }
 
     void Awake()
@@ -63,6 +62,7 @@ public class HardwareInterface : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            AddCubeConnectedAction(() => FadeAllLeds(CubeColor.black, 200));
         }
     }
 
