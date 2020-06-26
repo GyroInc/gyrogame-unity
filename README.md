@@ -1,6 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f86b783ab3654214a645aaf30f1354c0)](https://app.codacy.com/gh/GyroInc/gyrogame-unity?utm_source=github.com&utm_medium=referral&utm_content=GyroInc/gyrogame-unity&utm_campaign=Badge_Grade_Dashboard)
 
-![GyroGame Logo](https://raw.githubusercontent.com/Manut38/gyrogame-unity/master/Documentation/Logo/GyroGame_textlogo.png)
+![GyroGame Logo](https://raw.githubusercontent.com/GyroInc/gyrogame-unity/master/Documentation/Logo/GyroGame_textlogo.png)
 
 <br>
 
