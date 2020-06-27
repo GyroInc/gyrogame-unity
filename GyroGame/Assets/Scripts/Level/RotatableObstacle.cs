@@ -28,8 +28,8 @@ public class RotatableObstacle : MonoBehaviour
             } else if (HardwareInterface.Instance.IsNoCubeMode())
             {
 
-                float noCubeX = noCubeRotation.eulerAngles.x + Input.GetAxis("Mouse X");
-                float noCubeY = noCubeRotation.eulerAngles.y + Input.GetAxis("Mouse Y");
+                float noCubeX = noCubeRotation.eulerAngles.x + Input.GetAxis("Mouse Y");
+                float noCubeY = noCubeRotation.eulerAngles.y + Input.GetAxis("Mouse X");
                 noCubeRotation = Quaternion.Euler(noCubeX, noCubeY, 0);
                 inputAngle = noCubeRotation;
             }
