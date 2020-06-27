@@ -45,8 +45,9 @@ public class HardwareInterface : MonoBehaviour
 
     private event CubeStatusChangeHandler CubeConnectedEvent;
     private event CubeStatusChangeHandler CubeDisconnectedEvent;
-
     public delegate void CubeStatusChangeHandler();
+
+    private bool noCubeMode;
 
     void Awake()
     {
@@ -64,6 +65,10 @@ public class HardwareInterface : MonoBehaviour
 
     private void Update()
     {
+        if (noCubeMode)
+        {
+
+        }
         if (port == null) return;
         if (!port.IsOpen || !connected) return;
         cubeTimeoutTimer += Time.deltaTime;
@@ -400,6 +405,15 @@ public class HardwareInterface : MonoBehaviour
         {
             CancelConnectionAttempt();
         }
+    }
+    public bool IsNoCubeMode()
+    {
+        return noCubeMode;
+    }
+
+    public void SetNoCubeMode(bool mode)
+    {
+        noCubeMode = mode;
     }
 }
 

@@ -27,6 +27,10 @@ public class ObstacleMover : MonoBehaviour
                     selected = hit.transform.parent.gameObject.GetComponent<ObstacleCoupler>().GetParentObstacle();
                 }
                 selected.SetActiveObstacle(true);
+                if (HardwareInterface.Instance.IsNoCubeMode())
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().SetCanLookAround(false);
+                }
 
                 //color stuff
                 HardwareInterface.Instance.FadeAllLeds(new CubeColor(selected.cubeColor), cubeColorFadeTime);
@@ -49,6 +53,10 @@ public class ObstacleMover : MonoBehaviour
         if (selected != null)
         {
             selected.SetActiveObstacle(false);
+        }
+        if (HardwareInterface.Instance.IsNoCubeMode())
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().SetCanLookAround(true);
         }
     }
 

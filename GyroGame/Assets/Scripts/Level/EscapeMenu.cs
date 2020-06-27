@@ -74,6 +74,19 @@ public class EscapeMenu : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().SetLookSpeed(speed);
     } 
 
+    public void SetNoCubeMode(bool noCube)
+    {
+        HardwareInterface.Instance?.SetNoCubeMode(noCube);
+        if (noCube)
+        {
+
+        } 
+        else
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController2>().SetCanLookAround(true);
+        }
+    }
+
     public void toggleCubeConnection()
     {
         if (HardwareInterface.Instance.isAttemptingConnection())
