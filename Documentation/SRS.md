@@ -66,7 +66,7 @@ This document is designed for internal use only and will outline the development
 | [**GitHub - Unity Project**](https://github.com/GyroInc/gyrogame-unity)                                      | 19/10/2019 |
 | [**GitHub - Controller Firmware**](https://github.com/GyroInc/gyrogame-hardware)                             | 19/10/2019 |
 | [**YouTrack Project Management**](https://youtrack.gyrogame.de)                                              | 10/12/2019 |
-| [**Overall Use-Case-Diagram**](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD.PNG) | 21/10/2019 |
+| [**Overall Use-Case-Diagram**](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD_rev2.PNG) | 21/10/2019 |
 
 ### 1.5 Overview
 
@@ -80,7 +80,7 @@ The goal of GyroGame is to create a new kind of game for gamers that are also ma
 
 ### 2.2 Overall Use-Case-Diagram
 
-![UseCaseDiagram](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD.svg)
+![UseCaseDiagram](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD_rev2.svg)
 
 ### 2.3 Use Cases
 
