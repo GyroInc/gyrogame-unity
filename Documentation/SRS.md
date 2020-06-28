@@ -63,10 +63,10 @@ This document is designed for internal use only and will outline the development
 | Title                                                                                                        | Date       |
 | ------------------------------------------------------------------------------------------------------------ | ---------- |
 | [**Blog**](https://gyrogame.de/)                                                                             | 19/10/2019 |
-| [**GitHub - Unity Project**](https://github.com/Manut38/gyrogame-unity)                                      | 19/10/2019 |
-| [**GitHub - Controller Firmware**](https://github.com/Manut38/gyrogame-hardware)                             | 19/10/2019 |
+| [**GitHub - Unity Project**](https://github.com/GyroInc/gyrogame-unity)                                      | 19/10/2019 |
+| [**GitHub - Controller Firmware**](https://github.com/GyroInc/gyrogame-hardware)                             | 19/10/2019 |
 | [**YouTrack Project Management**](https://youtrack.gyrogame.de)                                              | 10/12/2019 |
-| [**Overall Use-Case-Diagram**](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.PNG) | 21/10/2019 |
+| [**Overall Use-Case-Diagram**](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD.PNG) | 21/10/2019 |
 
 ### 1.5 Overview
 
@@ -80,17 +80,17 @@ The goal of GyroGame is to create a new kind of game for gamers that are also ma
 
 ### 2.2 Overall Use-Case-Diagram
 
-![UseCaseDiagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.svg)
+![UseCaseDiagram](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD.svg)
 
 ### 2.3 Use Cases
 
-[Use Case: Player Movement](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
+[Use Case: Player Movement](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
 
-[Use Case: Pause Menu](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PauseMenu/UC_PauseMenu.md)
+[Use Case: Pause Menu](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/PauseMenu/UC_PauseMenu.md)
 
-[Use Case: Connect Control Cube](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/ConnectCube/UC_ConnectCube.md)
+[Use Case: Connect Control Cube](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/ConnectCube/UC_ConnectCube.md)
 
-[Use Case: Rotate Obstacle](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
+[Use Case: Rotate Obstacle](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
 
 
 ### 2.4 User Characteristics

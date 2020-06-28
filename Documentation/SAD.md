@@ -46,10 +46,10 @@ This document describes the architecture of the GyroGame Project.
 | **Title**                                                                                                                 |
 | -----------------------------------------------------------------------------                                             |
 | [**GyroGame Blog**](https://gyrogame.de/)                                                                                 |
-| [**GitHub - Unity Project**](https://github.com/Manut38/gyrogame-unity)                                                   |
-| [**GitHub - Controller Firmware**](https://github.com/Manut38/gyrogame-hardware)                                          |
+| [**GitHub - Unity Project**](https://github.com/GyroInc/gyrogame-unity)                                                   |
+| [**GitHub - Controller Firmware**](https://github.com/GyroInc/gyrogame-hardware)                                          |
 | [**YouTrack Project Management**](https://youtrack.gyrogame.de)                                                           |
-| [**Software Requirements Specification**]((https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/SRS.md))   |
+| [**Software Requirements Specification**]((https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/SRS.md))   |
 
 ### 1.5 Overview
 
@@ -68,24 +68,24 @@ This component-based architecture, if properly executed, allows for a very clear
 
 Below, you can find the overall use case diagram that shows all use cases the application should provide.
 
-![Overall Use Case Diagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/OUCD.svg)
+![Overall Use Case Diagram](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/OUCD.svg)
 
 Here you can find the various use case specification documents:
 
-- [Use Case: Player Movement](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
-- [Use Case: Pause Menu](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/PauseMenu/UC_PauseMenu.md)
-- [Use Case: Connect Control Cube](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/ConnectCube/UC_ConnectCube.md)
-- [Use Case: Rotate Obstacle](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
+- [Use Case: Player Movement](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/PlayerMovement/UC_PlayerMovement.md)
+- [Use Case: Pause Menu](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/PauseMenu/UC_PauseMenu.md)
+- [Use Case: Connect Control Cube](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/ConnectCube/UC_ConnectCube.md)
+- [Use Case: Rotate Obstacle](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/UseCases/RotateObstacle/UC_RotateObstacle.md)
 
 ## 5. Logical View
 
 ### 5.1 Overview
 
-![Component Architecture Logical View](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/images/ComponentLogicalView.svg)
+![Component Architecture Logical View](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/images/ComponentLogicalView.svg)
 
 ### 5.2 Architecturally Significant Design Packages
 
-![Class Diagram](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/images/ClassDiagram_labeled.png)
+![Class Diagram](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/images/ClassDiagram_labeled.png)
 
 ## 6. Process View
 
@@ -93,7 +93,7 @@ N/A
 
 ## 7. Deployment View
 
-![Deployment View](https://github.com/Manut38/gyrogame-unity/blob/master/Documentation/images/DeploymentView.svg)
+![Deployment View](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/images/DeploymentView.svg)
 
 ## 8. Implementation View
 

@@ -8,9 +8,9 @@ Scenario: Custom Links
 
     Given the gyrogame home page is displayed
     When I click on the custom link labeled "GitHub – Unity Project"
-    Then the page title should contain "Manut38/gyrogame-unity"
+    Then the page title should contain "GyroInc/gyrogame-unity"
 
     Given the gyrogame home page is displayed
     When I click on the custom link labeled "GitHub – Controller Firmware"
-    Then the page title should contain "Manut38/gyrogame-hardware"
+    Then the page title should contain "GyroInc/gyrogame-hardware"
 
