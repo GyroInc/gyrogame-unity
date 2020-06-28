@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baudRate: 38400
-  defaultBrightness: 128
+  defaultBrightness: 200
   lowBatteryVoltage: 3
   fixedCOMPort: 0
   debugCOMPort: COM
