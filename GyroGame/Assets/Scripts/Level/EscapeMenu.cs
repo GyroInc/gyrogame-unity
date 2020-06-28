@@ -26,7 +26,6 @@ public class EscapeMenu : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
