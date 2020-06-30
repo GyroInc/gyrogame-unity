@@ -49,7 +49,7 @@ This document describes the architecture of the GyroGame Project.
 | [**GitHub - Unity Project**](https://github.com/GyroInc/gyrogame-unity)                                                   |
 | [**GitHub - Controller Firmware**](https://github.com/GyroInc/gyrogame-hardware)                                          |
 | [**YouTrack Project Management**](https://youtrack.gyrogame.de)                                                           |
-| [**Software Requirements Specification**]((https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/SRS.md))   |
+| [**Software Requirements Specification**](https://github.com/GyroInc/gyrogame-unity/blob/master/Documentation/SRS.md)   |
 
 ### 1.5 Overview
 
